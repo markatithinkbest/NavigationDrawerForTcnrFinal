@@ -278,7 +278,10 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
             String strJson = readRawJson(cat);
 
-
+            if (strJson==null || strJson.length()==0){
+                Log.d(LOG_TAG, "NO JSON" );
+                return;
+            }
 
             Log.d(LOG_TAG, "input=" + strJson.substring(0, 1000));
             try {
@@ -316,7 +319,10 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                     Log.d(LOG_TAG, "json " + i + " is " + name);
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                Log.d(LOG_TAG, "JSONException "+e.toString());
+            } catch (Exception e){
+                Log.d(LOG_TAG, "Exception "+e.toString());
             }
 
             // add to database
@@ -380,6 +386,10 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            }            catch (Exception e){
+
+                Log.d(LOG_TAG, "Exception "+e.toString());
+
             }
             return builder.toString();
         }
