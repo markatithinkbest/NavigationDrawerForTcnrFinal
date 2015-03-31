@@ -21,21 +21,45 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.SearchManager;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Vector;
 
 /**
  * This example illustrates a common usage of the DrawerLayout widget
@@ -65,6 +89,9 @@ import android.widget.Toast;
  * for example enabling or disabling a data overlay on top of the current content.</p>
  */
 public class NavigationDrawerActivity extends Activity implements PlanetAdapter.OnItemClickListener {
+
+    static String LOG_TAG = "MARK987";
+
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -225,13 +252,171 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             fragment.setArguments(args);
             return fragment;
         }
+        private Cursor getGrpMembers(int cat) {
+            Uri uri = OkProvider.CONTENT_URI;
+            String[] projection = new String[]{OkProvider.COLUMN_ID,
+                    OkProvider.COLUMN_NAME, OkProvider.COLUMN_ADDR_DIST};
+            //
+            String selection =OkProvider.COLUMN_CERTIFICATION_CATEGORY+"=\""+OkProvider.CATXX[cat]+"\"" ;
+
+            String[] selectionArgs = null;
+            String sortOrder = OkProvider.COLUMN_DISPLAY_ADDR;
+
+            return getActivity().managedQuery(uri, projection, selection, selectionArgs,
+                    sortOrder);
+        }
+
+
+        void processJson(int cat) {
+
+            StrictMode.ThreadPolicy policy = new StrictMode.
+                    ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            Vector<ContentValues> cVVector = null;
+
+
+            String strJson = readRawJson(cat);
+
+
+
+            Log.d(LOG_TAG, "input=" + strJson.substring(0, 1000));
+            try {
+                JSONArray jsonArray = new JSONArray(strJson);
+                cVVector = new Vector<ContentValues>(jsonArray.length());
+//    * 標題 name
+//    * Ok認證類別 certification_category
+//    * 連絡電話 tel
+//    * 顯示用地址 display_addr
+//    * 系統辨識用地址 poi_addr
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String name = jsonObject.getString(OkProvider.COLUMN_NAME);
+                    String certification_category = jsonObject.getString(OkProvider.COLUMN_CERTIFICATION_CATEGORY);
+                    String tel = jsonObject.getString(OkProvider.COLUMN_TEL);
+                    String display_addr = jsonObject.getString(OkProvider.COLUMN_DISPLAY_ADDR);
+                    String poi_addr = jsonObject.getString(OkProvider.COLUMN_POI_ADDR);
+
+                    //
+                    String addr_dist = display_addr.substring(0,6);
+
+                    ContentValues weatherValues = new ContentValues();
+                    weatherValues.put(OkProvider.COLUMN_NAME, name);
+                    weatherValues.put(OkProvider.COLUMN_CERTIFICATION_CATEGORY, certification_category);
+                    weatherValues.put(OkProvider.COLUMN_TEL, tel);
+                    weatherValues.put(OkProvider.COLUMN_DISPLAY_ADDR, display_addr);
+                    weatherValues.put(OkProvider.COLUMN_POI_ADDR, poi_addr);
+
+                    //
+                    weatherValues.put(OkProvider.COLUMN_ADDR_DIST, addr_dist+"  tel: "+tel);
+
+                    cVVector.add(weatherValues);
+
+                    Log.d(LOG_TAG, "json " + i + " is " + name);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            // add to database
+            if ( cVVector.size() > 0 ) {
+                String str=null;
+
+                String selection =OkProvider.COLUMN_CERTIFICATION_CATEGORY+"=\""+OkProvider.CATXX[cat]+"\"" ;
+
+                int delCnt=getActivity().getContentResolver().delete(OkProvider.CONTENT_URI,
+                        selection,
+                        null);
+                Log.d(LOG_TAG, "del cnt= "+ delCnt);
+
+
+
+
+                ContentValues[] cvArray = new ContentValues[cVVector.size()];
+                cVVector.toArray(cvArray);
+                int bulkCnt=getActivity().getContentResolver().bulkInsert(OkProvider.CONTENT_URI, cvArray);
+                Log.d(LOG_TAG, "bulk cnt= "+ bulkCnt);
+
+
+// delete old data so we don't build up an endless history
+//           getContentResolver().delete(OkProvider.CONTENT_URI,
+//                    WeatherContract.WeatherEntry.COLUMN_DATE + " <= ?",
+//                    new String[] {Long.toString(dayTime.setJulianDay(julianStartDay-1))});
+                // notifyWeather();
+                //      getContentResolver().
+            }
+
+
+        }
+
+        public String readRawJson(int cat) {
+            StringBuilder builder = new StringBuilder();
+            HttpClient client = new DefaultHttpClient();
+//        HttpGet httpGet = new HttpGet("https://bugzilla.mozilla.org/rest/bug?assigned_to=lhenry@mozilla.com");
+          //  String str = "http://data.taipei.gov.tw/opendata/apply/json/QTdBNEQ5NkQtQkM3MS00QUI2LUJENTctODI0QTM5MkIwMUZE";
+            String str=OkProvider.CATXX_JSON[cat];
+
+
+
+            HttpGet httpGet = new HttpGet(str);
+            Log.d(LOG_TAG, "new HttpGet(str) => " + str);
+            try {
+                HttpResponse response = client.execute(httpGet);
+                StatusLine statusLine = response.getStatusLine();
+                int statusCode = statusLine.getStatusCode();
+                if (statusCode == 200) {
+                    HttpEntity entity = response.getEntity();
+                    InputStream content = entity.getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        builder.append(line);
+                    }
+                } else {
+                    Log.e(LOG_TAG, "Failed to download file");
+                }
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return builder.toString();
+        }
+
+
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_planet, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_listview, container, false);
+            // for listview
+            ListView listView=(ListView)rootView.findViewById(R.id.listView);
 
             int i = getArguments().getInt(ARG_PLANET_NUMBER);
+            processJson(i);
+
+            Cursor mGrpMemberCursor = getGrpMembers(i);
+            getActivity().startManagingCursor(mGrpMemberCursor);
+            SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
+                    android.R.layout.simple_list_item_2, mGrpMemberCursor, new String[]{OkProvider.COLUMN_NAME, OkProvider.COLUMN_ADDR_DIST }, new int[]{
+                    android.R.id.text1, android.R.id.text2});
+
+            listView.setAdapter(adapter);
+
+
+
+
+
+
+
+
+
+
+
+
+            // for title
+
 //            String planet = getResources().getStringArray(R.array.planets_array)[i];
 //
 //            int imageId = getResources().getIdentifier(planet.toLowerCase(Locale.getDefault()),
