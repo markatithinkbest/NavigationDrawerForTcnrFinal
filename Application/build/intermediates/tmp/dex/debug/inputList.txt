@@ -1,0 +1,9 @@
+/home/u1/000/android-projects/NavigationDrawer/Application/build/intermediates/classes/debug
+/home/u1/000/android-projects/NavigationDrawer/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-6f1c8d5039ca38b2b5b3295afebe2387279df7f6.jar
+/home/u1/000/android-projects/NavigationDrawer/Application/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-dee8284f65e78826f55e9fced01506c830d91c76.jar
+/home/u1/000/android-projects/NavigationDrawer/Application/build/intermediates/pre-dexed/debug/classes-2a8d112589958736aa76920cf18366a6e9bdde9a.jar
+/home/u1/000/android-projects/NavigationDrawer/Application/build/intermediates/pre-dexed/debug/classes-8ba5e3366bcf12baf59d9f88b2fd34880a0fb5a6.jar
+/home/u1/000/android-projects/NavigationDrawer/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-fdab4f814e3dc9a4a0f80affdf73433624ce0899.jar
+/home/u1/000/android-projects/NavigationDrawer/Application/build/intermediates/pre-dexed/debug/classes-492d4cb50208c0e36e80da29bd66f50cc1a9d204.jar
+/home/u1/000/android-projects/NavigationDrawer/Application/build/intermediates/pre-dexed/debug/classes-8217c5d609fc1f4dbeb224f78eeb88321b996f7d.jar
+/home/u1/000/android-projects/NavigationDrawer/Application/build/intermediates/pre-dexed/debug/classes-e688bb4b56025e9b667fbfd68e39137f65ab9d17.jar
