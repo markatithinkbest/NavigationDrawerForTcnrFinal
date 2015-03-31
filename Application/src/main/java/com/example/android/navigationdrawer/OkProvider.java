@@ -46,14 +46,65 @@ public class OkProvider extends ContentProvider {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(PROVIDER_NAME, SUB1, uriCode);
     }
-
+//    <item>旅館業</item>
+//    <item>美容美髮業</item>
+//    <item>電影片映演業</item>
+//    <item>游泳業</item>
+//    <item>浴室業</item>
+//    <item>娛樂業</item>
+//    <item>製麵業及包子饅頭製作業</item>
+//    <item>食品販售業</item>
+//    <item>一般餐飲業</item>
+//    <item>飲冰品業</item>
+//    <item>烘焙業</item>
+//    <item>中央廚房</item>
+//    <item>休憩餐飲業</item>
     private SQLiteDatabase sqlDB;
     static final String CAT00 = "旅館業";
     static final String CAT01 = "美容美髮業";
-    static final String CAT00_JSON="http://data.taipei.gov.tw/opendata/apply/json/QTdBNEQ5NkQtQkM3MS00QUI2LUJENTctODI0QTM5MkIwMUZE";
-    static final String CAT01_JSON="http://data.taipei.gov.tw/opendata/apply/json/NzQzQjFGQjUtNzUxMi00RkUxLUIwQ0UtOUQxNjQ4MkExMDBD";
-    public final static String[] CATXX= {CAT00,CAT01};
-    public final static String[] CATXX_JSON= {CAT00_JSON,CAT01_JSON};
+    static final String CAT02 = "電影片映演業";
+    static final String CAT03 = "游泳業";
+    static final String CAT04 = "浴室業";
+    static final String CAT05 = "娛樂業";
+    static final String CAT06 = "製麵業及包子饅頭製作業";
+    static final String CAT07 = "食品販售業";
+    static final String CAT08 = "一般餐飲業";
+    static final String CAT09 = "飲冰品業";
+    static final String CAT10 = "烘焙業";
+    static final String CAT11 = "中央廚房";
+    static final String CAT12 = "休憩餐飲業";
+
+    static final String JSN00="http://data.taipei.gov.tw/opendata/apply/json/QTdBNEQ5NkQtQkM3MS00QUI2LUJENTctODI0QTM5MkIwMUZE";
+    static final String JSN01="http://data.taipei.gov.tw/opendata/apply/json/NzQzQjFGQjUtNzUxMi00RkUxLUIwQ0UtOUQxNjQ4MkExMDBD";
+    static final String JSN02="http://data.taipei.gov.tw/opendata/apply/json/NEMwNDE1OTEtRTJDOC00NTM2LUI1QkItMjc3NDJBMDU3MjNE";
+    static final String JSN03="http://data.taipei.gov.tw/opendata/apply/json/N0JCNzMwNEYtMkRDQi00ODNFLUIzQjMtN0E0ODM4RTU4NUUz";
+    static final String JSN04="http://data.taipei.gov.tw/opendata/apply/json/NEFERTQ0NDUtQjFFMy00NzJGLTlDRUQtQURGMEExQzI2NjNF";
+    static final String JSN05="http://data.taipei.gov.tw/opendata/apply/json/MDE1QzBFRUQtQkE2RC00MjNGLTkwMUEtOUMzMTU3MDYwNkE2";
+    static final String JSN06="http://data.taipei.gov.tw/opendata/apply/json/N0JFMjA1NEUtNjJCQi00NkIzLThDNTEtMEVDMDBERDE0QkUx";
+    static final String JSN07="http://data.taipei.gov.tw/opendata/apply/json/RUMzQTdDQUYtRDQ5NC00QTVBLUJFRkMtMzlEQUMwNTVBN0Yx";
+    static final String JSN08="http://data.taipei.gov.tw/opendata/apply/json/MDY2RERBMTctQTE4Mi00OEU5LUI2M0YtRTg0NTQ1NUEzM0Mw";
+    static final String JSN09="http://data.taipei.gov.tw/opendata/apply/json/ODg0QTEyNUEtRDMwQi00RTJCLTgyODAtQzNBMzlFOTk1NUJF";
+    static final String JSN10="http://data.taipei.gov.tw/opendata/apply/json/QzgwMEFBMjUtMjlCNS00OUZDLUE2MzgtQUIyRDJBRDM5NjJB";
+    static final String JSN11="http://data.taipei.gov.tw/opendata/apply/json/NEI5ODUxQzMtRTc5MS00MjJCLTk1QTMtMTkxRUFCQTBBMzY5";
+    static final String JSN12="http://data.taipei.gov.tw/opendata/apply/json/QTBEMTY0RUEtMjgyNi00Q0I1LTkwNzMtMjlDQUM0MkNBOTdD";
+    public final static String[] CATXX= {CAT00,CAT01,CAT02,CAT03,CAT04,CAT05,CAT06,CAT07,CAT08,CAT09,CAT10,CAT11,CAT12};
+    public final static String[] JSNXX = {JSN00,JSN01,JSN02,JSN03,JSN04,JSN05,JSN06,JSN07,JSN08,JSN09,JSN10,JSN11,JSN12};
+
+
+//    <item>旅館業</item>
+//    <item>美容美髮業</item>
+//    <item>電影片映演業</item>
+//    <item>游泳業</item>
+//    <item>浴室業</item>
+//    <item>娛樂業</item>
+//    <item>製麵業</item>
+//    <item>食品販售業</item>
+//    <item>旅館業</item>
+//    <item>一般餐飲業</item>
+//    <item>飲冰品業</item>
+//    <item>烘焙業</item>
+//    <item>中央廚房</item>
+//    <item>休憩餐飲業</item>
 
     DatabaseHelper dbHelper=null;
 

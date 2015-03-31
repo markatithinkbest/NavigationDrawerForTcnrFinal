@@ -292,11 +292,11 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String name = jsonObject.getString(OkProvider.COLUMN_NAME);
-                    String certification_category = jsonObject.getString(OkProvider.COLUMN_CERTIFICATION_CATEGORY);
-                    String tel = jsonObject.getString(OkProvider.COLUMN_TEL);
-                    String display_addr = jsonObject.getString(OkProvider.COLUMN_DISPLAY_ADDR);
-                    String poi_addr = jsonObject.getString(OkProvider.COLUMN_POI_ADDR);
+                    String name = jsonObject.getString(OkProvider.COLUMN_NAME).trim();
+                    String certification_category = jsonObject.getString(OkProvider.COLUMN_CERTIFICATION_CATEGORY).trim();
+                    String tel = jsonObject.getString(OkProvider.COLUMN_TEL).trim();
+                    String display_addr = jsonObject.getString(OkProvider.COLUMN_DISPLAY_ADDR).trim();
+                    String poi_addr = jsonObject.getString(OkProvider.COLUMN_POI_ADDR).trim();
 
                     //
                     String addr_dist = display_addr.substring(0,6);
@@ -309,7 +309,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                     weatherValues.put(OkProvider.COLUMN_POI_ADDR, poi_addr);
 
                     //
-                    weatherValues.put(OkProvider.COLUMN_ADDR_DIST, addr_dist+"  tel: "+tel);
+                    weatherValues.put(OkProvider.COLUMN_ADDR_DIST, display_addr+"  tel: "+tel);
 
                     cVVector.add(weatherValues);
 
@@ -355,7 +355,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             HttpClient client = new DefaultHttpClient();
 //        HttpGet httpGet = new HttpGet("https://bugzilla.mozilla.org/rest/bug?assigned_to=lhenry@mozilla.com");
           //  String str = "http://data.taipei.gov.tw/opendata/apply/json/QTdBNEQ5NkQtQkM3MS00QUI2LUJENTctODI0QTM5MkIwMUZE";
-            String str=OkProvider.CATXX_JSON[cat];
+            String str=OkProvider.JSNXX[cat];
 
 
 
