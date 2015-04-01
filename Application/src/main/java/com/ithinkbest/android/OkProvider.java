@@ -10,20 +10,26 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.HashMap;
 
 public class OkProvider extends ContentProvider {
-
+    static String LOG_TAG = "MARK987";
     // ### NEED TO CHANGE TO YOUR DOMAIN
     // static final String PROVIDER_NAME =
     // "com.ithinkbest.tcnr18.finaltwo.MembersProvider";
     static final String PROVIDER_NAME = "com.ithinkbest.android.OkProvider";
 
     private static final String SUB1 = "sub1";
+    private static final String SUB2 = "sub2"; // for rawQuery
+
     private static final String URL = "content://" + PROVIDER_NAME + "/" + SUB1;
+    private static final String URL_RAW_QUERY = "content://" + PROVIDER_NAME + "/" + SUB2;
+
     static final Uri CONTENT_URI = Uri.parse(URL);
+    static final Uri CONTENT_URI_RAW_QUERY = Uri.parse(URL_RAW_QUERY);
 
     // `id` int(11) NOT NULL auto_increment,
     // `username` varchar(20) NOT NULL,
@@ -36,6 +42,8 @@ public class OkProvider extends ContentProvider {
     // `address2` double default NULL,
 
     static final int uriCode = 1;
+    static final int uriCodeRawQuery = 2;
+
 
     private static HashMap<String, String> values;
 
@@ -45,6 +53,8 @@ public class OkProvider extends ContentProvider {
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(PROVIDER_NAME, SUB1, uriCode);
+        uriMatcher.addURI(PROVIDER_NAME, SUB2, uriCodeRawQuery);
+
     }
 //    <item>旅館業</item>
 //    <item>美容美髮業</item>
@@ -114,7 +124,7 @@ public class OkProvider extends ContentProvider {
 //    * Ok認證類別 certification_category
 //    * 連絡電話 tel
 //    * 顯示用地址 display_addr
-//    * 系統辨識用地址 poi_addr
+//    * 系統辨識用地址 poi_addrc
 
     static final String COLUMN_ID = "_id"; // local ID
     static final String COLUMN_NAME = "name";
@@ -163,6 +173,7 @@ public class OkProvider extends ContentProvider {
     }
 
 
+//    @Override
     public Cursor rawQuery(String sql){
         return dbHelper.getReadableDatabase().rawQuery(sql, null);
 
@@ -193,6 +204,15 @@ public class OkProvider extends ContentProvider {
                 // names
                 queryBuilder.setProjectionMap(values);
                 break;
+            case uriCodeRawQuery:
+            String sql="SELECT "+COLUMN_ID+","+
+                    COLUMN_DISTRICT+", COUNT("+COLUMN_DISTRICT+") AS CNT"+
+                    " FROM "+TABLE_NAME+
+                    " WHERE  "+selection+
+                    " GROUP BY "+COLUMN_DISTRICT;
+                Log.d(LOG_TAG, "############## raw query ############"+sql);
+                return dbHelper.getReadableDatabase().rawQuery(sql, null);
+          //  break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }

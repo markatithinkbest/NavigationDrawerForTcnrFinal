@@ -247,9 +247,10 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
      * Fragment that appears in the "content_frame", shows a planet
      */
     public static class TaipeiFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-        String[] taipei_district=null;// = res.getStringArray(R.array.planets_array);
-
+        String[] Taipei_District =null;// = res.getStringArray(R.array.planets_array);
+        String[] Certification_Category=null;
         ListView listView;
+        Spinner spinner;
         int selectedCategory=0;
 
 
@@ -266,7 +267,68 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             fragment.setArguments(args);
             return fragment;
         }
+
+
+        private Cursor getSummary(int cat) {
+            Uri uri = OkProvider.CONTENT_URI_RAW_QUERY;
+            String[] projection = new String[]{OkProvider.COLUMN_ID,
+                    OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR};
+            //
+            String selection =OkProvider.COLUMN_CERTIFICATION_CATEGORY+"=\""+Certification_Category[cat]+"\"" ;
+
+            String[] selectionArgs = null;
+            String sortOrder = null;
+
+            return getActivity().managedQuery(uri, projection, selection, selectionArgs,
+                    sortOrder);
+
+
+            //return null;
+        }
         private Cursor getList(int cat) {
+
+            Cursor debugCursor=getSummary(cat);
+            if (debugCursor.moveToFirst()){
+                do {
+                    String district = debugCursor.getString(0);
+                    String cnt = debugCursor.getString(1);
+
+                    Log.d(LOG_TAG, "CURSOR district=" + district+" cnt="+cnt);
+                } while (debugCursor.moveToNext());
+            }
+
+            SimpleCursorAdapter spinnerAdapter = new SimpleCursorAdapter(getActivity(),
+                    android.R.layout.simple_list_item_2, debugCursor, new String[]{OkProvider.COLUMN_DISTRICT, "CNT"}, new int[]{
+                    android.R.id.text1, android.R.id.text2});
+
+            spinner.setAdapter(spinnerAdapter);
+
+//            ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
+//                    R.array.taipei_district, android.R.layout.simple_spinner_item);
+//// Specify the layout to use when the list of choices appears
+//            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//// Apply the adapter to the spinner
+////            spinner.setAdapter(spinnerAdapter);
+////            spinner.setOnItemSelectedListener(this);
+//
+//
+//            String colors[] = {"Red","Blue","White","Yellow","Black", "Green","Purple","Orange","Grey"};
+//
+//// Selection of the spinner
+////            Spinner spinner = (Spinner) findViewById(R.id.myspinner);
+//
+//// Application of the Array to the Spinner
+//            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getActivity(),   android.R.layout.simple_spinner_item, colors);
+//            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+//            spinner.setAdapter(spinnerArrayAdapter);
+
+
+
+
+
+
+            //
+
             Uri uri = OkProvider.CONTENT_URI;
             String[] projection = new String[]{OkProvider.COLUMN_ID,
                     OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR};
@@ -279,6 +341,26 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             return getActivity().managedQuery(uri, projection, selection, selectionArgs,
                     sortOrder);
         }
+
+
+//        private Cursor getListSummary(int cat) {
+//           // getActivity().getContentResolver().
+//
+//
+//            return null;
+////            Uri uri = OkProvider.CONTENT_URI;
+////            String[] projection = new String[]{OkProvider.COLUMN_ID,
+////                    OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR};
+////            //
+////            String selection =OkProvider.COLUMN_CERTIFICATION_CATEGORY+"=\""+OkProvider.CATXX[cat]+"\"" ;
+////
+////            String[] selectionArgs = null;
+////            String sortOrder = OkProvider.COLUMN_DISPLAY_ADDR;
+////
+////            return getActivity().managedQuery(uri, projection, selection, selectionArgs,
+////                    sortOrder);
+//        }
+
 
 
         private Cursor getList(int cat,String district) {
@@ -406,15 +488,15 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
         String getDistrict(String address){
             String strDist=null;
-            int knownDist=taipei_district.length-1;
-            for (int i=0;i<taipei_district.length-1;i++){
-                strDist=taipei_district[i].substring(4);
+            int knownDist= Taipei_District.length-1;
+            for (int i=0;i< Taipei_District.length-1;i++){
+                strDist= Taipei_District[i].substring(4);
                 if (address.indexOf(strDist)>=0){
                    knownDist=i;
                     break;
                 }
             }
-            return taipei_district[knownDist];
+            return Taipei_District[knownDist];
         }
         public String readRawJson(int cat) {
             StringBuilder builder = new StringBuilder();
@@ -463,14 +545,15 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 //            View rootView = inflater.inflate(R.layout.fragment_listview, container, false);
 //            ListView listView=(ListView)rootView.findViewById(R.id.listView);
 
-            taipei_district=getResources().getStringArray(R.array.taipei_district);
+            Taipei_District =getResources().getStringArray(R.array.taipei_district);
+            Certification_Category =getResources().getStringArray(R.array.certification_category);
 
 
             View rootView = inflater.inflate(R.layout.fragment_listview_v2, container, false);
             listView=(ListView)rootView.findViewById(R.id.listView2);
 
             //spinner
-            Spinner spinner = (Spinner) rootView.findViewById(R.id.spinner);
+             spinner = (Spinner) rootView.findViewById(R.id.spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
             ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
                     R.array.taipei_district, android.R.layout.simple_spinner_item);
@@ -539,8 +622,8 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 //            ImageView iv = ((ImageView) rootView.findViewById(R.id.image));
 //            iv.setImageResource(imageId);
            // Resources res = getResources();
-            String[] planets = getResources().getStringArray(R.array.certification_category);
-            getActivity().setTitle(planets[selectedCategory]);
+            String[] certification_category = getResources().getStringArray(R.array.certification_category);
+            getActivity().setTitle(certification_category[selectedCategory]);
             return rootView;
         }
 
