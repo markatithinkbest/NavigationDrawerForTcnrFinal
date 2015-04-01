@@ -580,12 +580,13 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    TextView textView=(TextView)view.findViewById(android.R.id.text2);
+                    TextView textView1=(TextView)view.findViewById(android.R.id.text1);
+                    TextView textView2=(TextView)view.findViewById(android.R.id.text2);
 
 
                     String check="臺北市松山區八德路四段138號B3F（京華城股份有限公司";
-                    check=textView.getText().toString();
-                    if (check.indexOf("台北市")!=0 || check.indexOf("臺北市")!=0){
+                    check=textView2.getText().toString();
+                    if (!(check.indexOf("台北市")==0 || check.indexOf("臺北市")==0)){
                         Log.d(LOG_TAG,"before  @@@@@ "+check);
 
                         check="台北市"+check;
@@ -593,6 +594,16 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
                     }
 
+                    int temp=check.indexOf("tel");
+                    if (temp>0 ){
+                        Log.d(LOG_TAG,"to remove tel, before  @@@@@ "+check);
+
+                        check=check.substring(0,temp);
+                        Log.d(LOG_TAG,"to remove tel, after  @@@@@ "+check);
+
+                    }
+
+                    //  check=textView1.getText().toString()+", "+check;
                     Log.d(LOG_TAG,"addr for map is "+check);
                     String map = "http://maps.google.com/maps?q=" + check;
 
