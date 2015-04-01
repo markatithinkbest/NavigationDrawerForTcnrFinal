@@ -48,7 +48,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.navigationdrawer.PlanetAdapter;
 import com.example.android.navigationdrawer.R;
 
 import org.apache.http.HttpEntity;
