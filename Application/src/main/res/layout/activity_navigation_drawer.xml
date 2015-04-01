@@ -42,6 +42,7 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="left|start"
+        android:background="#aa0f0f0f"
         android:choiceMode="singleChoice"
         android:divider="@null"
         />
