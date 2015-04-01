@@ -288,14 +288,14 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
         private Cursor getList(int cat) {
 
             Cursor debugCursor=getSummary(cat);
-            if (debugCursor.moveToFirst()){
-                do {
-                    String district = debugCursor.getString(0);
-                    String cnt = debugCursor.getString(1);
-
-                    Log.d(LOG_TAG, "CURSOR district=" + district+" cnt="+cnt);
-                } while (debugCursor.moveToNext());
-            }
+//            if (debugCursor.moveToFirst()){
+//                do {
+//                    String district = debugCursor.getString(0);
+//                    String cnt = debugCursor.getString(1);
+//
+//                    Log.d(LOG_TAG, "CURSOR district=" + district+" cnt="+cnt);
+//                } while (debugCursor.moveToNext());
+//            }
 
             SimpleCursorAdapter spinnerAdapter = new SimpleCursorAdapter(getActivity(),
                     android.R.layout.simple_list_item_2, debugCursor, new String[]{OkProvider.COLUMN_DISTRICT, "CNT"}, new int[]{
@@ -629,11 +629,17 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
             Resources res = getResources();
             String[] taipei_district = res.getStringArray(R.array.taipei_district);
-            Log.d(LOG_TAG," position:"+position+ " "+taipei_district[position]);
-            String district=taipei_district[position].substring(4);
-            Cursor mGrpMemberCursor = getList(selectedCategory,district);
+          //  Log.d(LOG_TAG," position:"+position+ " "+taipei_district[position]);
+          //  String district=taipei_district[position].substring(4);
+
+            TextView textView=(TextView)view.findViewById(android.R.id.text1);
+            String strDist=textView.getText().toString();
+            Log.d(LOG_TAG," textView:"+strDist);
+
+            Cursor mGrpMemberCursor = getList(selectedCategory,strDist);
             getActivity().startManagingCursor(mGrpMemberCursor);
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
                     android.R.layout.simple_list_item_2, mGrpMemberCursor, new String[]{OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR}, new int[]{
