@@ -327,7 +327,13 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                     String name = jsonObject.getString(OkProvider.COLUMN_NAME).trim();
                     String certification_category = jsonObject.getString(OkProvider.COLUMN_CERTIFICATION_CATEGORY).trim();
                     String tel = jsonObject.getString(OkProvider.COLUMN_TEL).trim();
+                    // not to show null
+                    if (tel==null || tel.equals("null")){
+                        tel="";
+                    }
                     String display_addr = jsonObject.getString(OkProvider.COLUMN_DISPLAY_ADDR).trim();
+
+
                     String poi_addr = jsonObject.getString(OkProvider.COLUMN_POI_ADDR).trim();
 
                     //
@@ -337,7 +343,16 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                     weatherValues.put(OkProvider.COLUMN_NAME, name);
                     weatherValues.put(OkProvider.COLUMN_CERTIFICATION_CATEGORY, certification_category);
                     weatherValues.put(OkProvider.COLUMN_TEL, tel);
-                    weatherValues.put(OkProvider.COLUMN_DISPLAY_ADDR, display_addr+"  tel: "+tel);
+
+                    if (tel.equals("")){
+                        weatherValues.put(OkProvider.COLUMN_DISPLAY_ADDR, display_addr);
+
+                    }else{
+                        weatherValues.put(OkProvider.COLUMN_DISPLAY_ADDR, display_addr+"  tel: "+tel);
+
+                    }
+
+
                     weatherValues.put(OkProvider.COLUMN_POI_ADDR, poi_addr);
 
                     //
