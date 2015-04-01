@@ -14,19 +14,19 @@
 * limitations under the License.
 */
 
-package com.example.android.navigationdrawer;
+package com.ithinkbest.android;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+
+import com.example.android.navigationdrawer.R;
 
 /**
  * A simple launcher activity offering access to the individual samples in this project.

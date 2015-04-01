@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.navigationdrawer;
+package com.ithinkbest.android;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -47,6 +47,9 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.android.navigationdrawer.PlanetAdapter;
+import com.example.android.navigationdrawer.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

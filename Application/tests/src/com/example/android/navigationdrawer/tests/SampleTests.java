@@ -15,7 +15,7 @@
 */
 package com.example.android.navigationdrawer.tests;
 
-import com.example.android.navigationdrawer.*;
+import com.ithinkbest.android.NavigationDrawerActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
 

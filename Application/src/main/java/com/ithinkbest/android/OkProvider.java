@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawer;
+package com.ithinkbest.android;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -19,7 +19,7 @@ public class OkProvider extends ContentProvider {
     // ### NEED TO CHANGE TO YOUR DOMAIN
     // static final String PROVIDER_NAME =
     // "com.ithinkbest.tcnr18.finaltwo.MembersProvider";
-    static final String PROVIDER_NAME = "com.example.android.navigationdrawer.OkProvider";
+    static final String PROVIDER_NAME = "com.ithinkbest.android.OkProvider";
 
     private static final String SUB1 = "sub1";
     private static final String URL = "content://" + PROVIDER_NAME + "/" + SUB1;
