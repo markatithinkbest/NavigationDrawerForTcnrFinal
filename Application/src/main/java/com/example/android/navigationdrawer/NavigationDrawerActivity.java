@@ -204,7 +204,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
     private void selectItem(int position) {
         // update the main content by replacing fragments
-        Fragment fragment = PlanetFragment.newInstance(position);
+        Fragment fragment = TaipeiFragment.newInstance(position);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -244,7 +244,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
     /**
      * Fragment that appears in the "content_frame", shows a planet
      */
-    public static class PlanetFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+    public static class TaipeiFragment extends Fragment implements AdapterView.OnItemSelectedListener {
         String[] taipei_district=null;// = res.getStringArray(R.array.planets_array);
 
         ListView listView;
@@ -253,14 +253,14 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
         public static final String ARG_PLANET_NUMBER = "planet_number";
 
-        public PlanetFragment() {
+        public TaipeiFragment() {
             // Empty constructor required for fragment subclasses
         }
 
         public static Fragment newInstance(int position) {
-            Fragment fragment = new PlanetFragment();
+            Fragment fragment = new TaipeiFragment();
             Bundle args = new Bundle();
-            args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
+            args.putInt(TaipeiFragment.ARG_PLANET_NUMBER, position);
             fragment.setArguments(args);
             return fragment;
         }
