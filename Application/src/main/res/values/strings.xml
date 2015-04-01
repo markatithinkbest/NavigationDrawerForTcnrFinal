@@ -30,8 +30,45 @@
         <item>11</item>
         <item>12</item>
     </string-array>
+
+
+
+    2.1 中正區（100）
+    2.2 大同區（103）
+    2.3 中山區（104）
+    2.4 松山區（105）
+    2.5 大安區（106）
+    2.6 萬華區（108）
+    2.7 信義區（110）
+    2.8 士林區（111）
+    2.9 北投區（112）
+    2.10 內湖區（114）
+    2.11 南港區（115）
+    2.12 文山區（116）
+
+    <string-array name="taipei_district">
+        <item>100 中正區</item>
+        <item>103 大同區</item>
+        <item>104 中山區</item>
+        <item>105 松山區</item>
+        <item>106 大安區</item>
+        <item>108 萬華區</item>
+        <item>110 信義區</item>
+        <item>111 士林區</item>
+        <item>112 北投區</item>
+        <item>114 內湖區</item>
+        <item>115 南港區</item>
+        <item>116 文山區</item>
+        <item>(地址無區)
+        </item>
+
+
+    </string-array>
+
+
+
     <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
+    <string name="drawer_close">Close navition drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
 </resources>

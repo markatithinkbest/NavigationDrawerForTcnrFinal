@@ -40,8 +40,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -238,7 +241,12 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
     /**
      * Fragment that appears in the "content_frame", shows a planet
      */
-    public static class PlanetFragment extends Fragment {
+    public static class PlanetFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
+        ListView listView;
+        int selectedCategory=0;
+
+
         public static final String ARG_PLANET_NUMBER = "planet_number";
 
         public PlanetFragment() {
@@ -399,14 +407,31 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_listview, container, false);
-            // for listview
-            ListView listView=(ListView)rootView.findViewById(R.id.listView);
 
-            int i = getArguments().getInt(ARG_PLANET_NUMBER);
-            processJson(i);
+//            View rootView = inflater.inflate(R.layout.fragment_listview, container, false);
+//            ListView listView=(ListView)rootView.findViewById(R.id.listView);
 
-            Cursor mGrpMemberCursor = getGrpMembers(i);
+            View rootView = inflater.inflate(R.layout.fragment_listview_v2, container, false);
+            listView=(ListView)rootView.findViewById(R.id.listView2);
+
+            //spinner
+            Spinner spinner = (Spinner) rootView.findViewById(R.id.spinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+            ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
+                    R.array.taipei_district, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+            spinner.setAdapter(spinnerAdapter);
+            spinner.setOnItemSelectedListener(this);
+
+
+
+
+            selectedCategory = getArguments().getInt(ARG_PLANET_NUMBER);
+            processJson(selectedCategory);
+
+            Cursor mGrpMemberCursor = getGrpMembers(selectedCategory);
             getActivity().startManagingCursor(mGrpMemberCursor);
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
                     android.R.layout.simple_list_item_2, mGrpMemberCursor, new String[]{OkProvider.COLUMN_NAME, OkProvider.COLUMN_ADDR_DIST }, new int[]{
@@ -435,8 +460,29 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 //            iv.setImageResource(imageId);
             Resources res = getResources();
             String[] planets = res.getStringArray(R.array.planets_array);
-            getActivity().setTitle(planets[i]);
+            getActivity().setTitle(planets[selectedCategory]);
             return rootView;
+        }
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            Resources res = getResources();
+            String[] taipei_district = res.getStringArray(R.array.taipei_district);
+            Log.d(LOG_TAG," position:"+position+ " "+taipei_district[position]);
+
+            Cursor mGrpMemberCursor = getGrpMembers(selectedCategory);
+            getActivity().startManagingCursor(mGrpMemberCursor);
+            SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
+                    android.R.layout.simple_list_item_2, mGrpMemberCursor, new String[]{OkProvider.COLUMN_NAME, OkProvider.COLUMN_ADDR_DIST }, new int[]{
+                    android.R.id.text1, android.R.id.text2});
+
+            listView.setAdapter(adapter);
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
         }
     }
 }

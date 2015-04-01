@@ -18,6 +18,7 @@ public final class R {
     }
     public static final class array {
         public static final int planets_array=0x7f050000;
+        public static final int taipei_district=0x7f050001;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -1452,7 +1453,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
-        public static final int action_websearch=0x7f090043;
+        public static final int action_websearch=0x7f090045;
         public static final int activity_chooser_view_content=0x7f090021;
         public static final int always=0x7f090016;
         public static final int beginning=0x7f090013;
@@ -1477,6 +1478,7 @@ containing a value of this type.
         public static final int left_drawer=0x7f090041;
         public static final int listMode=0x7f090009;
         public static final int listView=0x7f090042;
+        public static final int listView2=0x7f090044;
         public static final int list_item=0x7f090025;
         public static final int middle=0x7f090015;
         public static final int never=0x7f090019;
@@ -1499,6 +1501,7 @@ containing a value of this type.
         public static final int showCustom=0x7f09000f;
         public static final int showHome=0x7f090010;
         public static final int showTitle=0x7f090011;
+        public static final int spinner=0x7f090043;
         public static final int split_action_bar=0x7f090007;
         public static final int submit_area=0x7f09003c;
         public static final int tabMode=0x7f09000b;
@@ -1539,9 +1542,10 @@ containing a value of this type.
         public static final int activity_navigation_drawer=0x7f030018;
         public static final int drawer_list_item=0x7f030019;
         public static final int fragment_listview=0x7f03001a;
-        public static final int fragment_planet=0x7f03001b;
-        public static final int sample_dashboard_item=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
+        public static final int fragment_listview_v2=0x7f03001b;
+        public static final int fragment_planet=0x7f03001c;
+        public static final int sample_dashboard_item=0x7f03001d;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
     }
     public static final class menu {
         public static final int navigation_drawer=0x7f0d0000;
