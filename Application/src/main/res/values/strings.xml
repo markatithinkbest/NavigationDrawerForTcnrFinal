@@ -15,36 +15,24 @@
   limitations under the License.
   -->
 <resources>
-    <string-array name="planets_array">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
+    <string-array name="certification_category">
+        <item>旅館業</item>
+        <item>美容美髮業</item>
+        <item>電影片映演業</item>
+        <item>游泳業</item>
+        <item>浴室業</item>
+        <item>娛樂業</item>
+        <item>製麵業及包子饅頭製作業</item>
+        <item>食品販售業</item>
+        <item>一般餐飲業</item>
+        <item>飲冰品業</item>
+        <item>烘焙業</item>
+        <item>中央廚房</item>
+        <item>休憩餐飲業</item>
     </string-array>
 
 
 
-    2.1 中正區（100）
-    2.2 大同區（103）
-    2.3 中山區（104）
-    2.4 松山區（105）
-    2.5 大安區（106）
-    2.6 萬華區（108）
-    2.7 信義區（110）
-    2.8 士林區（111）
-    2.9 北投區（112）
-    2.10 內湖區（114）
-    2.11 南港區（115）
-    2.12 文山區（116）
 
     <string-array name="taipei_district">
         <item>100 中正區</item>

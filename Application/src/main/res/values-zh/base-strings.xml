@@ -15,14 +15,14 @@
  limitations under the License.
 -->
 <resources>
-    <string name="app_name">AAA台北OK</string>
+    <string name="app_name">台北OK認證</string>
     <string name="intro_message">
         <![CDATA[
         
             
-             結訓專題
-             ??             This example illustrates a common usage of the DrawerLayout widget in the Android
-             support library.
+            結訓專題，要支援多國語系，
+            側邊欄，具備四大元件
+            （Activities, Services, Content providers 和 Broadcast receivers)
             
         
         ]]>

@@ -15,13 +15,14 @@
  limitations under the License.
 -->
 <resources>
-    <string name="app_name">Taipei OK</string>
+    <string name="app_name">Taipei OK Certified</string>
     <string name="intro_message">
         <![CDATA[
         
             
-             This example illustrates a common usage of the DrawerLayout widget in the Android
-             support library.
+           Final Project, to support multiple language,
+           navigation drawer, including four types of app components
+           （Activities, Services, Content providers and Broadcast receivers)
             
         
         ]]>

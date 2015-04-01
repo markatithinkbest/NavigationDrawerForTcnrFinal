@@ -45,6 +45,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -111,7 +112,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
 
         mTitle = mDrawerTitle = getTitle();
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
+        mPlanetTitles = getResources().getStringArray(R.array.certification_category);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer);
 
@@ -491,7 +492,32 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
             listView.setAdapter(adapter);
 
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    TextView textView=(TextView)view.findViewById(android.R.id.text2);
 
+
+                    String check="臺北市松山區八德路四段138號B3F（京華城股份有限公司";
+                    check=textView.getText().toString();
+                    if (check.indexOf("台北市")!=0 || check.indexOf("臺北市")!=0){
+                        Log.d(LOG_TAG,"before  @@@@@ "+check);
+
+                        check="台北市"+check;
+                        Log.d(LOG_TAG,"after adding prefix 台北市 @@@@@ "+check);
+
+                    }
+
+                    Log.d(LOG_TAG,"addr for map is "+check);
+                    String map = "http://maps.google.com/maps?q=" + check;
+
+// where check is the address string
+
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+                    startActivity(i);
+                }
+            });
+            //http://stackoverflow.com/questions/9987551/how-to-open-google-maps-using-address
 
 
 
@@ -511,7 +537,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 //            ImageView iv = ((ImageView) rootView.findViewById(R.id.image));
 //            iv.setImageResource(imageId);
            // Resources res = getResources();
-            String[] planets = getResources().getStringArray(R.array.planets_array);
+            String[] planets = getResources().getStringArray(R.array.certification_category);
             getActivity().setTitle(planets[selectedCategory]);
             return rootView;
         }

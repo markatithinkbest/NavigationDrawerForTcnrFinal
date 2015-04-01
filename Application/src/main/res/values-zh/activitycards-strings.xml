@@ -16,7 +16,7 @@
 -->
 
 <resources>
-    <string name="navigationdraweractivity_title">Navigation Drawer Example</string>
-    <string name="navigationdraweractivity_description">This example illustrates a common usage of the DrawerLayout widget in the Android
-            support library.</string>
+    <string name="navigationdraweractivity_title">所有的資料都來自台北 Open Data</string>
+    <string name="navigationdraweractivity_description">程式採用 Android 側邊欄九大行星範例
+            </string>
 </resources>
