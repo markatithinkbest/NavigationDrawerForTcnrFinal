@@ -124,12 +124,12 @@ public class OkProvider extends ContentProvider {
     static final String COLUMN_POI_ADDR = "poi_addr";
 
     //
-    static final String COLUMN_ADDR_DIST = "addr_dist";
+    static final String COLUMN_DISTRICT = "district";
 
 
     static private final String DATABASE_NAME = "taipei.db"; // YOUR DESIRED DATABASE
     static private final String TABLE_NAME = "ok"; // YOUR DESIRED TABLE
-    static private final int DATABASE_VERSION = 4; // ### need to increase when change
+    static private final int DATABASE_VERSION = 5; // ### need to increase when change
 
     static private final String COL0 = COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT";
     static private final String COL1 = COLUMN_NAME + " TEXT NOT NULL ";
@@ -139,7 +139,7 @@ public class OkProvider extends ContentProvider {
     static private final String COL5 = COLUMN_POI_ADDR + " TEXT NOT NULL ";
 
     //
-    static private final String COL6 = COLUMN_ADDR_DIST + " TEXT NOT NULL ";
+    static private final String COL6 = COLUMN_DISTRICT + " TEXT NOT NULL ";
 
     // table structure
     static private final String CREATE_DB_TABLE = " CREATE TABLE " + TABLE_NAME + " ("

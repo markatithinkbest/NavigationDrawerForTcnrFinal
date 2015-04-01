@@ -95,6 +95,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
     static String LOG_TAG = "MARK987";
 
+
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -107,6 +108,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
+
 
         mTitle = mDrawerTitle = getTitle();
         mPlanetTitles = getResources().getStringArray(R.array.planets_array);
@@ -242,6 +244,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
      * Fragment that appears in the "content_frame", shows a planet
      */
     public static class PlanetFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+        String[] taipei_district=null;// = res.getStringArray(R.array.planets_array);
 
         ListView listView;
         int selectedCategory=0;
@@ -260,10 +263,10 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             fragment.setArguments(args);
             return fragment;
         }
-        private Cursor getGrpMembers(int cat) {
+        private Cursor getList(int cat) {
             Uri uri = OkProvider.CONTENT_URI;
             String[] projection = new String[]{OkProvider.COLUMN_ID,
-                    OkProvider.COLUMN_NAME, OkProvider.COLUMN_ADDR_DIST};
+                    OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR};
             //
             String selection =OkProvider.COLUMN_CERTIFICATION_CATEGORY+"=\""+OkProvider.CATXX[cat]+"\"" ;
 
@@ -273,6 +276,24 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             return getActivity().managedQuery(uri, projection, selection, selectionArgs,
                     sortOrder);
         }
+
+
+        private Cursor getList(int cat,String district) {
+            Uri uri = OkProvider.CONTENT_URI;
+            String[] projection = new String[]{OkProvider.COLUMN_ID,
+                    OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR};
+            //
+            String selection =OkProvider.COLUMN_CERTIFICATION_CATEGORY+"=\""+OkProvider.CATXX[cat]+"\""
+                    +" AND "+OkProvider.COLUMN_DISTRICT+" LIKE '%"+district+"%'";
+            //name like '% LIM %'
+
+            String[] selectionArgs = null;
+            String sortOrder = OkProvider.COLUMN_DISPLAY_ADDR;
+
+            return getActivity().managedQuery(uri, projection, selection, selectionArgs,
+                    sortOrder);
+        }
+
 
 
         void processJson(int cat) {
@@ -316,15 +337,16 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                     weatherValues.put(OkProvider.COLUMN_NAME, name);
                     weatherValues.put(OkProvider.COLUMN_CERTIFICATION_CATEGORY, certification_category);
                     weatherValues.put(OkProvider.COLUMN_TEL, tel);
-                    weatherValues.put(OkProvider.COLUMN_DISPLAY_ADDR, display_addr);
+                    weatherValues.put(OkProvider.COLUMN_DISPLAY_ADDR, display_addr+"  tel: "+tel);
                     weatherValues.put(OkProvider.COLUMN_POI_ADDR, poi_addr);
 
                     //
-                    weatherValues.put(OkProvider.COLUMN_ADDR_DIST, display_addr+"  tel: "+tel);
-
+                   String strDist=getDistrict(display_addr);
+                    weatherValues.put(OkProvider.COLUMN_DISTRICT, strDist);
+                    Log.d(LOG_TAG, "strDist=" + strDist + " COLUMN_DISPLAY_ADDR=" + display_addr);
                     cVVector.add(weatherValues);
 
-                    Log.d(LOG_TAG, "json " + i + " is " + name);
+//                    Log.d(LOG_TAG, "json " + i + " is " + name);
                 }
             } catch (JSONException e) {
 //                e.printStackTrace();
@@ -364,6 +386,18 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
         }
 
+        String getDistrict(String address){
+            String strDist=null;
+            int knownDist=taipei_district.length-1;
+            for (int i=0;i<taipei_district.length-1;i++){
+                strDist=taipei_district[i].substring(4);
+                if (address.indexOf(strDist)>=0){
+                   knownDist=i;
+                    break;
+                }
+            }
+            return taipei_district[knownDist];
+        }
         public String readRawJson(int cat) {
             StringBuilder builder = new StringBuilder();
             HttpClient client = new DefaultHttpClient();
@@ -411,6 +445,9 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 //            View rootView = inflater.inflate(R.layout.fragment_listview, container, false);
 //            ListView listView=(ListView)rootView.findViewById(R.id.listView);
 
+            taipei_district=getResources().getStringArray(R.array.taipei_district);
+
+
             View rootView = inflater.inflate(R.layout.fragment_listview_v2, container, false);
             listView=(ListView)rootView.findViewById(R.id.listView2);
 
@@ -431,10 +468,10 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             selectedCategory = getArguments().getInt(ARG_PLANET_NUMBER);
             processJson(selectedCategory);
 
-            Cursor mGrpMemberCursor = getGrpMembers(selectedCategory);
+            Cursor mGrpMemberCursor = getList(selectedCategory);
             getActivity().startManagingCursor(mGrpMemberCursor);
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
-                    android.R.layout.simple_list_item_2, mGrpMemberCursor, new String[]{OkProvider.COLUMN_NAME, OkProvider.COLUMN_ADDR_DIST }, new int[]{
+                    android.R.layout.simple_list_item_2, mGrpMemberCursor, new String[]{OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR}, new int[]{
                     android.R.id.text1, android.R.id.text2});
 
             listView.setAdapter(adapter);
@@ -458,8 +495,8 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 //                    "drawable", getActivity().getPackageName());
 //            ImageView iv = ((ImageView) rootView.findViewById(R.id.image));
 //            iv.setImageResource(imageId);
-            Resources res = getResources();
-            String[] planets = res.getStringArray(R.array.planets_array);
+           // Resources res = getResources();
+            String[] planets = getResources().getStringArray(R.array.planets_array);
             getActivity().setTitle(planets[selectedCategory]);
             return rootView;
         }
@@ -469,11 +506,11 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             Resources res = getResources();
             String[] taipei_district = res.getStringArray(R.array.taipei_district);
             Log.d(LOG_TAG," position:"+position+ " "+taipei_district[position]);
-
-            Cursor mGrpMemberCursor = getGrpMembers(selectedCategory);
+            String district=taipei_district[position].substring(4);
+            Cursor mGrpMemberCursor = getList(selectedCategory,district);
             getActivity().startManagingCursor(mGrpMemberCursor);
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
-                    android.R.layout.simple_list_item_2, mGrpMemberCursor, new String[]{OkProvider.COLUMN_NAME, OkProvider.COLUMN_ADDR_DIST }, new int[]{
+                    android.R.layout.simple_list_item_2, mGrpMemberCursor, new String[]{OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR}, new int[]{
                     android.R.id.text1, android.R.id.text2});
 
             listView.setAdapter(adapter);
