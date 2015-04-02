@@ -29,7 +29,7 @@
         android:showAsAction="ifRoom|withText" />
     <item android:id="@+id/action_debug"
         android:title="@string/debug"
-        android:visible="true"
+        android:visible="false"
         android:showAsAction="ifRoom|withText" />
 
 </menu>
