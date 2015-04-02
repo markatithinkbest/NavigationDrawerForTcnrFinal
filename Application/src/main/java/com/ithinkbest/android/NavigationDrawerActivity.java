@@ -20,7 +20,10 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.SearchManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -29,6 +32,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,21 +44,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.navigationdrawer.R;
+
+//import com.example.android.navigationdrawer.R;
+//Toast com.example.android.navigationdrawer.R;
+
+//import com.example.android.navigationdrawer.R;
 
 /**
  * This example illustrates a common usage of the DrawerLayout widget
  * in the Android support library.
  * <p/>
  * <p>When a navigation (left) drawer is present, the host activity should detect presses of
- * the action bar's Up affordance as a signal to open and close the navigation drawer. The
+ * the action bar's Up affordance as a signal to open and org.apache.commons:commons-io:1.3.2close the navigation drawer. The
  * ActionBarDrawerToggle facilitates this behavior.
  * Items within the drawer should fall into one of two categories:</p>
  * <p/>
@@ -93,6 +100,11 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
+
+        //
+        //
+        notifyGooglePlay();
+        notifyAppWebpage();
 
 
         mTitle = mDrawerTitle = getTitle();
@@ -150,8 +162,8 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+        //     boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        //    menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -164,17 +176,17 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
         }
         // Handle action buttons
         switch (item.getItemId()) {
-            case R.id.action_websearch:
-                // create intent to perform web search for this planet
-                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
-                // catch event that there's no activity to handle intent
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
-                }
-                return true;
+//            case R.id.action_websearch:
+//                // create intent to perform web search for this planet
+//                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+//                intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
+//                // catch event that there's no activity to handle intent
+//                if (intent.resolveActivity(getPackageManager()) != null) {
+//                    startActivity(intent);
+//                } else {
+//                    Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
+//                }
+//                return true;
             case R.id.action_update:
                 Log.d(LOG_TAG, "...DEBUG action_update");
                 // use this to start and trigger a service
@@ -193,9 +205,80 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                 StrictMode.setThreadPolicy(policy);
                 getContentResolver().delete(OkProvider.CONTENT_URI, null, null);
                 return true;
+            case R.id.action_debug:
+                doingDebug();
+                return true;
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void doingDebug() {
+    }
+
+    private void notifyGooglePlay() {
+        int idGooglePlay = 12345;
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(getString(R.string.to_google_play));
+// Creates an explicit intent for an Activity in your app
+        Intent resultIntent = new Intent(this, ToGooglePlayActivity.class);
+
+// The stack builder object will contain an artificial back stack for the
+// started Activity.
+// This ensures that navigating backward from the Activity leads out of
+// your application to the Home screen.
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+// Adds the back stack for the Intent (but not the Intent itself)
+        stackBuilder.addParentStack(ToGooglePlayActivity.class);
+// Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+// mId allows you to update the notification later on.
+        mNotificationManager.notify(idGooglePlay, mBuilder.build());
+
+    }
+    private void notifyAppWebpage() {
+        int idGooglePlay = 12346;
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(getString(R.string.to_app_webpage));
+// Creates an explicit intent for an Activity in your app
+        Intent resultIntent = new Intent(this, ToAppWebpageActivity.class);
+
+// The stack builder object will contain an artificial back stack for the
+// started Activity.
+// This ensures that navigating backward from the Activity leads out of
+// your application to the Home screen.
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+// Adds the back stack for the Intent (but not the Intent itself)
+        stackBuilder.addParentStack(ToAppWebpageActivity.class);
+// Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+// mId allows you to update the notification later on.
+        mNotificationManager.notify(idGooglePlay, mBuilder.build());
+
     }
 
     /* The click listener for RecyclerView in the navigation drawer */
@@ -547,25 +630,25 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             //spinner
             spinner = (Spinner) rootView.findViewById(R.id.spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
-            ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
-                    R.array.taipei_district, android.R.layout.simple_spinner_item);
+            //          ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
+            //                 R.array.taipei_district, android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
-            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-            spinner.setAdapter(spinnerAdapter);
+            //       spinner.setAdapter(spinnerAdapter);
             spinner.setOnItemSelectedListener(this);
+            getList(0);
 
 
             selectedCategory = getArguments().getInt(ARG_PLANET_NUMBER);
 
-          // NOT TO UPDATE HERE
-          //  processJson(selectedCategory);
+            // NOT TO UPDATE HERE
+            //  processJson(selectedCategory);
             Intent i = new Intent(getActivity().getApplicationContext(), UpdateService.class);
 // potentially add data to the intent
             int[] cats = {selectedCategory};
             i.putExtra("CATS", cats);
             getActivity().getApplicationContext().startService(i);
-
 
 
             Cursor mGrpMemberCursor = getList(selectedCategory);
@@ -635,24 +718,27 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            try {
+                Resources res = getResources();
+                String[] taipei_district = res.getStringArray(R.array.taipei_district);
+                //  Log.d(LOG_TAG," position:"+position+ " "+taipei_district[position]);
+                //  String district=taipei_district[position].substring(4);
 
-            Resources res = getResources();
-            String[] taipei_district = res.getStringArray(R.array.taipei_district);
-            //  Log.d(LOG_TAG," position:"+position+ " "+taipei_district[position]);
-            //  String district=taipei_district[position].substring(4);
+                TextView textView = (TextView) view.findViewById(android.R.id.text1);
+                String strDist = textView.getText().toString();
+                Log.d(LOG_TAG, " textView:" + strDist);
 
-            TextView textView = (TextView) view.findViewById(android.R.id.text1);
-            String strDist = textView.getText().toString();
-            Log.d(LOG_TAG, " textView:" + strDist);
+                Cursor mGrpMemberCursor = getList(selectedCategory, strDist);
+                getActivity().startManagingCursor(mGrpMemberCursor);
+                SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
+                        android.R.layout.simple_list_item_2, mGrpMemberCursor, new String[]{OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR}, new int[]{
+                        android.R.id.text1, android.R.id.text2});
 
-            Cursor mGrpMemberCursor = getList(selectedCategory, strDist);
-            getActivity().startManagingCursor(mGrpMemberCursor);
-            SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
-                    android.R.layout.simple_list_item_2, mGrpMemberCursor, new String[]{OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR}, new int[]{
-                    android.R.id.text1, android.R.id.text2});
+                listView.setAdapter(adapter);
+            } catch (Exception e) {
+                Log.d(LOG_TAG, "onItemSelected, textView is null");
 
-            listView.setAdapter(adapter);
-
+            }
         }
 
         @Override

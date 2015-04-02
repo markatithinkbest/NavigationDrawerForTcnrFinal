@@ -1355,24 +1355,26 @@ containing a value of this type.
         public static final int abc_text_size_subtitle_material_toolbar=0x7f080022;
         public static final int abc_text_size_title_material=0x7f080023;
         public static final int abc_text_size_title_material_toolbar=0x7f080024;
-        public static final int card_margin=0x7f080025;
-        public static final int card_padding=0x7f080026;
-        public static final int cardview_compat_inset_shadow=0x7f080027;
-        public static final int cardview_default_elevation=0x7f080028;
-        public static final int cardview_default_radius=0x7f080029;
-        public static final int dialog_fixed_height_major=0x7f08002a;
-        public static final int dialog_fixed_height_minor=0x7f08002b;
-        public static final int dialog_fixed_width_major=0x7f08002c;
-        public static final int dialog_fixed_width_minor=0x7f08002d;
-        public static final int disabled_alpha_material_dark=0x7f08002e;
-        public static final int disabled_alpha_material_light=0x7f08002f;
-        public static final int horizontal_page_margin=0x7f080030;
-        public static final int margin_huge=0x7f080031;
-        public static final int margin_large=0x7f080032;
-        public static final int margin_medium=0x7f080033;
-        public static final int margin_small=0x7f080034;
-        public static final int margin_tiny=0x7f080035;
-        public static final int vertical_page_margin=0x7f080036;
+        public static final int activity_horizontal_margin=0x7f080025;
+        public static final int activity_vertical_margin=0x7f080026;
+        public static final int card_margin=0x7f080027;
+        public static final int card_padding=0x7f080028;
+        public static final int cardview_compat_inset_shadow=0x7f080029;
+        public static final int cardview_default_elevation=0x7f08002a;
+        public static final int cardview_default_radius=0x7f08002b;
+        public static final int dialog_fixed_height_major=0x7f08002c;
+        public static final int dialog_fixed_height_minor=0x7f08002d;
+        public static final int dialog_fixed_width_major=0x7f08002e;
+        public static final int dialog_fixed_width_minor=0x7f08002f;
+        public static final int disabled_alpha_material_dark=0x7f080030;
+        public static final int disabled_alpha_material_light=0x7f080031;
+        public static final int horizontal_page_margin=0x7f080032;
+        public static final int margin_huge=0x7f080033;
+        public static final int margin_large=0x7f080034;
+        public static final int margin_medium=0x7f080035;
+        public static final int margin_small=0x7f080036;
+        public static final int margin_tiny=0x7f080037;
+        public static final int vertical_page_margin=0x7f080038;
     }
     public static final class drawable {
         public static final int abc_ab_share_pack_holo_dark=0x7f020000;
@@ -1449,14 +1451,15 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f09001f;
         public static final int action_bar_title=0x7f09001e;
         public static final int action_context_bar=0x7f090032;
+        public static final int action_debug=0x7f090048;
         public static final int action_del_all=0x7f090047;
         public static final int action_menu_divider=0x7f090002;
         public static final int action_menu_presenter=0x7f090003;
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
+        public static final int action_settings=0x7f090045;
         public static final int action_update=0x7f090046;
-        public static final int action_websearch=0x7f090045;
         public static final int activity_chooser_view_content=0x7f090021;
         public static final int always=0x7f090016;
         public static final int beginning=0x7f090013;
@@ -1543,15 +1546,17 @@ containing a value of this type.
         public static final int abc_simple_dropdown_hint=0x7f030016;
         public static final int activity_main=0x7f030017;
         public static final int activity_navigation_drawer=0x7f030018;
-        public static final int drawer_list_item=0x7f030019;
-        public static final int fragment_listview=0x7f03001a;
-        public static final int fragment_listview_v2=0x7f03001b;
-        public static final int fragment_planet=0x7f03001c;
-        public static final int sample_dashboard_item=0x7f03001d;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
+        public static final int activity_result=0x7f030019;
+        public static final int drawer_list_item=0x7f03001a;
+        public static final int fragment_listview=0x7f03001b;
+        public static final int fragment_listview_v2=0x7f03001c;
+        public static final int fragment_planet=0x7f03001d;
+        public static final int sample_dashboard_item=0x7f03001e;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
     }
     public static final class menu {
-        public static final int navigation_drawer=0x7f0d0000;
+        public static final int menu_result=0x7f0d0000;
+        public static final int navigation_drawer=0x7f0d0001;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f0b0000;
@@ -1570,16 +1575,22 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with=0x7f0b000d;
         public static final int abc_shareactionprovider_share_with_application=0x7f0b000e;
         public static final int abc_toolbar_collapse_description=0x7f0b000f;
-        public static final int action_websearch=0x7f0b0010;
-        public static final int app_name=0x7f0b0011;
-        public static final int app_not_available=0x7f0b0012;
-        public static final int del_all=0x7f0b0013;
-        public static final int drawer_close=0x7f0b0014;
-        public static final int drawer_open=0x7f0b0015;
-        public static final int intro_message=0x7f0b0016;
-        public static final int navigationdraweractivity_description=0x7f0b0017;
-        public static final int navigationdraweractivity_title=0x7f0b0018;
-        public static final int update=0x7f0b0019;
+        public static final int action_settings=0x7f0b0010;
+        public static final int action_websearch=0x7f0b0011;
+        public static final int app_name=0x7f0b0012;
+        public static final int app_not_available=0x7f0b0013;
+        public static final int debug=0x7f0b0014;
+        public static final int del_all=0x7f0b0015;
+        public static final int drawer_close=0x7f0b0016;
+        public static final int drawer_open=0x7f0b0017;
+        public static final int hello_world=0x7f0b0018;
+        public static final int intro_message=0x7f0b0019;
+        public static final int navigationdraweractivity_description=0x7f0b001a;
+        public static final int navigationdraweractivity_title=0x7f0b001b;
+        public static final int title_activity_result=0x7f0b001c;
+        public static final int to_app_webpage=0x7f0b001d;
+        public static final int to_google_play=0x7f0b001e;
+        public static final int update=0x7f0b001f;
     }
     public static final class style {
         public static final int AppTheme=0x7f0c0000;

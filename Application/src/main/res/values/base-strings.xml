@@ -16,6 +16,9 @@
 -->
 <resources>
     <string name="app_name">Taipei OK Certified</string>
+    <string name="to_google_play"> Check more on Google Play</string>
+    <string name="to_app_webpage"> Check Web Page of this App</string>
+
     <string name="intro_message">
         <![CDATA[
         

@@ -34,6 +34,7 @@
 
 
 
+
     <string-array name="taipei_district">
         <item>100 中正區</item>
         <item>103 大同區</item>
@@ -47,7 +48,7 @@
         <item>114 內湖區</item>
         <item>115 南港區</item>
         <item>116 文山區</item>
-        <item>(地址無區)
+        <item>XXX (地址無區)
         </item>
 
 
@@ -61,4 +62,9 @@
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
     <string name="update">Update</string>
     <string name="del_all">Delete All</string>
+    <string name="debug">Debug</string>
+    <string name="title_activity_result">ResultActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>

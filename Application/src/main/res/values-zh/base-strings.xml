@@ -16,6 +16,9 @@
 -->
 <resources>
     <string name="app_name">台北OK認證</string>
+    <string name="to_google_play">請查看 Play 商店
+    </string>
+    <string name="to_app_webpage"> 訪問這 App 的官網</string>
     <string name="intro_message">
         <![CDATA[
         

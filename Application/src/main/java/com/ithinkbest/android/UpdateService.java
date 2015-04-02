@@ -24,6 +24,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Vector;
 
 /**
@@ -79,6 +81,12 @@ public class UpdateService extends Service {
 
 
         String strJson = readRawJson(cat);
+
+
+
+
+
+
 
         if (strJson==null || strJson.length()==0){
             Log.d(LOG_TAG, "NO JSON" );
