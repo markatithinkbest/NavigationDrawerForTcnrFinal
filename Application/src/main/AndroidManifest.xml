@@ -47,6 +47,8 @@
             android:authorities="com.ithinkbest.android.OkProvider"
             android:exported="false"
             android:syncable="true" />
+        <service android:name="com.ithinkbest.android.UpdateService" />
+
     </application>
 
 </manifest>

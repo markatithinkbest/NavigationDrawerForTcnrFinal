@@ -59,4 +59,6 @@
     <string name="drawer_close">Close navition drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="update">Update</string>
+    <string name="del_all">Delete All</string>
 </resources>

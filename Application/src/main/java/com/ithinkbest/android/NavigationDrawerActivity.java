@@ -193,6 +193,17 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                     Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
                 }
                 return true;
+            case R.id.action_update:
+                Log.d(LOG_TAG,"...DEBUG action_update");
+                // use this to start and trigger a service
+                Intent i= new Intent(getApplicationContext(), UpdateService.class);
+// potentially add data to the intent
+                int [] cats={0,1};
+                i.putExtra("CATS", cats);
+                getApplicationContext().startService(i);
+
+
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

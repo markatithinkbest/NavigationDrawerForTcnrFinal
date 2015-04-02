@@ -20,4 +20,13 @@
         android:icon="@drawable/action_search"
         android:title="@string/action_websearch"
         android:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/action_update"
+        android:title="@string/update"
+        android:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/action_del_all"
+        android:title="@string/del_all"
+        android:showAsAction="ifRoom|withText" />
+
 </menu>

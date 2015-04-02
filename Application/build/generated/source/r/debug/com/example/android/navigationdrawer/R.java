@@ -1454,6 +1454,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
+        public static final int action_update=0x7f090046;
         public static final int action_websearch=0x7f090045;
         public static final int activity_chooser_view_content=0x7f090021;
         public static final int always=0x7f090016;
@@ -1576,6 +1577,7 @@ containing a value of this type.
         public static final int intro_message=0x7f0b0015;
         public static final int navigationdraweractivity_description=0x7f0b0016;
         public static final int navigationdraweractivity_title=0x7f0b0017;
+        public static final int update=0x7f0b0018;
     }
     public static final class style {
         public static final int AppTheme=0x7f0c0000;
