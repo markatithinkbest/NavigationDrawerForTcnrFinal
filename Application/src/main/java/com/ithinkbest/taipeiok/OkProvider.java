@@ -1,4 +1,4 @@
-package com.ithinkbest.android;
+package com.ithinkbest.taipeiok;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;

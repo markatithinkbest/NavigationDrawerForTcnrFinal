@@ -1,4 +1,4 @@
-package com.ithinkbest.android;
+package com.ithinkbest.taipeiok;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,15 +7,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.android.navigationdrawer.R;
 
-public class ToAppWebpageActivity extends Activity {
+
+public class ToGooglePlayActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
      //   setContentView(R.layout.activity_result);
-        String str="http://www.ithinkbest.com/taipei-ok/";
+        String str="https://play.google.com/store/search?q=ithinkbest.com";
         Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(str));
         startActivity(myIntent);
         finish();

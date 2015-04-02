@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Copyright 2014 The Android Open Source Project
 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
+    <resources>
+        <string-array name="certification_category">
+            <item>旅館業</item>
+            <item>美容美髮業</item>
+            <item>電影片映演業</item>
+            <item>游泳業</item>
+            <item>浴室業</item>
+            <item>娛樂業</item>
+            <item>製麵業及包子饅頭製作業</item>
+            <item>食品販售業</item>
+            <item>一般餐飲業</item>
+            <item>飲冰品業</item>
+            <item>烘焙業</item>
+            <item>中央廚房</item>
+            <item>休憩餐飲業</item>
+        </string-array>
 
-      http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-  -->
-<resources>
-    <string-array name="planets_array">
-        <item>旅館業</item>
-        <item>美容美髮業</item>
-        <item>電影片映演業</item>
-        <item>游泳業</item>
-        <item>浴室業</item>
-        <item>娛樂業</item>
-        <item>製麵業及包子饅頭製作業</item>
-        <item>食品販售業</item>
-        <item>一般餐飲業</item>
-        <item>飲冰品業</item>
-        <item>烘焙業</item>
-        <item>中央廚房</item>
-        <item>休憩餐飲業</item>
-    </string-array>
+        <string-array name="taipei_district">
+            <item>100 中正區</item>
+            <item>103 大同區</item>
+            <item>104 中山區</item>
+            <item>105 松山區</item>
+            <item>106 大安區</item>
+            <item>108 萬華區</item>
+            <item>110 信義區</item>
+            <item>111 士林區</item>
+            <item>112 北投區</item>
+            <item>114 內湖區</item>
+            <item>115 南港區</item>
+            <item>116 文山區</item>
+        <item>XXX (地址無區)
+        </item>
+        </string-array>
+
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>

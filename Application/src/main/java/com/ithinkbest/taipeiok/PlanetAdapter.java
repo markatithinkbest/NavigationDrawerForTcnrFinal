@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ithinkbest.android;
+package com.ithinkbest.taipeiok;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.android.navigationdrawer.R;
+
 
 /**
  * Adapter for the planet data used in our drawer menu,

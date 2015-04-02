@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.ithinkbest.android;
+package com.ithinkbest.taipeiok;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,7 +27,7 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.example.android.navigationdrawer.R;
+
 
 /**
  * A simple launcher activity offering access to the individual samples in this project.

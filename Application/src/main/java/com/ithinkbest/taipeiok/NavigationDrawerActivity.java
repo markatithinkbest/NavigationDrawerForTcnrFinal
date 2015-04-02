@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ithinkbest.android;
+package com.ithinkbest.taipeiok;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -50,7 +50,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.android.navigationdrawer.R;
+
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

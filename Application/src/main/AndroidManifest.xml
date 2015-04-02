@@ -15,7 +15,7 @@
  limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.navigationdrawer"
+    package="com.ithinkbest.taipeiok"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -27,46 +27,46 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+    <!--
+                  <activity
+                    android:name="com.ithinkbest.android.MainActivity"
+                    android:label="@string/app_name" >
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN" />
 
-              <activity
-                android:name="com.ithinkbest.android.MainActivity"
-                android:label="@string/app_name" >
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
+                        <category android:name="android.intent.category.LAUNCHER" />
+                    </intent-filter>
+                </activity>
+                <activity
+                    android:name="com.ithinkbest.android.NavigationDrawerActivity"
+                    android:label="@string/app_name"
+                    android:screenOrientation="portrait" >
+                </activity>
+         -->
+                <activity
+                    android:name=".NavigationDrawerActivity"
+                    android:label="@string/app_name" >
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN" />
 
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-            </activity>
-            <activity
-                android:name="com.ithinkbest.android.NavigationDrawerActivity"
-                android:label="@string/app_name"
-                android:screenOrientation="portrait" >
-            </activity>
-    <!--  
-            <activity
-                android:name="com.ithinkbest.android.NavigationDrawerActivity"
-                android:label="@string/app_name" >
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-            </activity>-->
+                        <category android:name="android.intent.category.LAUNCHER" />
+                    </intent-filter>
+                </activity>
 
         <provider
-            android:name="com.ithinkbest.android.OkProvider"
-            android:authorities="com.ithinkbest.android.OkProvider"
+            android:name=".OkProvider"
+            android:authorities="com.ithinkbest.taipeiok.OkProvider"
             android:exported="false"
             android:syncable="true" />
 
-        <service android:name="com.ithinkbest.android.UpdateService" />
+        <service android:name=".UpdateService" />
 
         <activity
-            android:name="com.ithinkbest.android.ToGooglePlayActivity"
+            android:name=".ToGooglePlayActivity"
             android:label="@string/title_activity_result" >
         </activity>
     <activity
-        android:name="com.ithinkbest.android.ToAppWebpageActivity"
+        android:name=".ToAppWebpageActivity"
         android:label="@string/title_activity_result" >
     </activity>
     </application>
