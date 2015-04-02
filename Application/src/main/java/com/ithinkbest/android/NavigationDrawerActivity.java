@@ -369,46 +369,18 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             //return null;
         }
 
+
+            private void updateSpinner(int cat) {
+                Cursor debugCursor = getSummary(cat);
+
+                SimpleCursorAdapter spinnerAdapter = new SimpleCursorAdapter(getActivity(),
+                        android.R.layout.simple_list_item_2, debugCursor, new String[]{OkProvider.COLUMN_DISTRICT, "CNT"}, new int[]{
+                        android.R.id.text1, android.R.id.text2});
+
+                spinner.setAdapter(spinnerAdapter);
+            }
+
         private Cursor getList(int cat) {
-
-            Cursor debugCursor = getSummary(cat);
-//            if (debugCursor.moveToFirst()){
-//                do {
-//                    String district = debugCursor.getString(0);
-//                    String cnt = debugCursor.getString(1);
-//
-//                    Log.d(LOG_TAG, "CURSOR district=" + district+" cnt="+cnt);
-//                } while (debugCursor.moveToNext());
-//            }
-
-            SimpleCursorAdapter spinnerAdapter = new SimpleCursorAdapter(getActivity(),
-                    android.R.layout.simple_list_item_2, debugCursor, new String[]{OkProvider.COLUMN_DISTRICT, "CNT"}, new int[]{
-                    android.R.id.text1, android.R.id.text2});
-
-            spinner.setAdapter(spinnerAdapter);
-
-//            ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
-//                    R.array.taipei_district, android.R.layout.simple_spinner_item);
-//// Specify the layout to use when the list of choices appears
-//            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//// Apply the adapter to the spinner
-////            spinner.setAdapter(spinnerAdapter);
-////            spinner.setOnItemSelectedListener(this);
-//
-//
-//            String colors[] = {"Red","Blue","White","Yellow","Black", "Green","Purple","Orange","Grey"};
-//
-//// Selection of the spinner
-////            Spinner spinner = (Spinner) findViewById(R.id.myspinner);
-//
-//// Application of the Array to the Spinner
-//            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getActivity(),   android.R.layout.simple_spinner_item, colors);
-//            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-//            spinner.setAdapter(spinnerArrayAdapter);
-
-
-            //
-
             Uri uri = OkProvider.CONTENT_URI;
             String[] projection = new String[]{OkProvider.COLUMN_ID,
                     OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR};
@@ -637,11 +609,11 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 // Apply the adapter to the spinner
             //       spinner.setAdapter(spinnerAdapter);
             spinner.setOnItemSelectedListener(this);
-            getList(0);
+
 
 
             selectedCategory = getArguments().getInt(ARG_PLANET_NUMBER);
-
+            updateSpinner(selectedCategory);
             // NOT TO UPDATE HERE
             //  processJson(selectedCategory);
             Intent i = new Intent(getActivity().getApplicationContext(), UpdateService.class);
