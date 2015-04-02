@@ -71,7 +71,7 @@ public class UpdateService extends Service {
 
 
 
-    void processJson(int cat) {
+    public void processJson(int cat) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.
                 ThreadPolicy.Builder().permitAll().build();
