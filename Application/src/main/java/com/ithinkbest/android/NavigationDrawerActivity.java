@@ -578,6 +578,13 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
           // NOT TO UPDATE HERE
           //  processJson(selectedCategory);
+            Intent i = new Intent(getActivity().getApplicationContext(), UpdateService.class);
+// potentially add data to the intent
+            int[] cats = {selectedCategory};
+            i.putExtra("CATS", cats);
+            getActivity().getApplicationContext().startService(i);
+
+
 
             Cursor mGrpMemberCursor = getList(selectedCategory);
             getActivity().startManagingCursor(mGrpMemberCursor);
@@ -594,8 +601,10 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                     TextView textView2 = (TextView) view.findViewById(android.R.id.text2);
 
 
-                    String check = "臺北市松山區八德路四段138號B3F（京華城股份有限公司";
-                    check = textView2.getText().toString();
+//                    String check = "臺北市松山區八德路四段138號B3F（京華城股份有限公司";
+
+
+                    String check = textView2.getText().toString();
                     if (!(check.indexOf("台北市") == 0 || check.indexOf("臺北市") == 0)) {
                         Log.d(LOG_TAG, "before  @@@@@ " + check);
 
@@ -620,7 +629,9 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 // where check is the address string
 
                     Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
-                    startActivity(i);
+
+                    // NOT TO START MAP AT THIS MOMENT
+//                    startActivity(i);
                 }
             });
             //http://stackoverflow.com/questions/9987551/how-to-open-google-maps-using-address

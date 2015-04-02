@@ -35,7 +35,7 @@ public class UpdateService extends Service {
     static String LOG_TAG = "MARK987";
     String[] Taipei_District;
     String[] Certification_Category;
-
+    static boolean[] cat_updated={false,false,false,false,false,false,false,false,false,false,false,false,false};
 
 
     @Override
@@ -45,10 +45,19 @@ public class UpdateService extends Service {
 
         Taipei_District =getResources().getStringArray(R.array.taipei_district);
         Certification_Category =getResources().getStringArray(R.array.certification_category);
-        int [] cats=intent.getIntArrayExtra ("CATS");
-        for (int i=0;i<cats.length;i++){
-            Log.d(LOG_TAG, "...cat="+cats[i]);
-            processJson(cats[i]);
+        int [] catArray=intent.getIntArrayExtra("CATS");
+        for (int i=0;i<catArray.length;i++){
+            int intCat=catArray[i];
+            Log.d(LOG_TAG, "...cat="+intCat);
+            if (cat_updated[intCat]) {
+                // updated, do nothing
+                Log.d(LOG_TAG, "...cat_updated="+cat_updated[intCat]);
+
+            }else {
+                Log.d(LOG_TAG, "...cat_updated="+cat_updated[intCat]);
+                processJson(intCat);
+                cat_updated[intCat]=true;
+            }
         }
 
         return Service.START_NOT_STICKY;
@@ -76,7 +85,7 @@ public class UpdateService extends Service {
             return;
         }
 
-        Log.d(LOG_TAG, "input=" + strJson.substring(0, 1000));
+        Log.d(LOG_TAG, "(first 50)input=" + strJson.substring(0, 50));
         try {
             JSONArray jsonArray = new JSONArray(strJson);
             cVVector = new Vector<ContentValues>(jsonArray.length());
