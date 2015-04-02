@@ -122,7 +122,7 @@ public class UpdateService extends Service {
                 //
                 String strDist=getDistrict(display_addr);
                 weatherValues.put(OkProvider.COLUMN_DISTRICT, strDist);
-                Log.d(LOG_TAG, "strDist=" + strDist + " COLUMN_DISPLAY_ADDR=" + display_addr);
+         //       Log.d(LOG_TAG, "strDist=" + strDist + " COLUMN_DISPLAY_ADDR=" + display_addr);
                 cVVector.add(weatherValues);
 
 //                    Log.d(LOG_TAG, "json " + i + " is " + name);

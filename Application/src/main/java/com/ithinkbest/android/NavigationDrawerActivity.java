@@ -194,15 +194,22 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                 }
                 return true;
             case R.id.action_update:
-                Log.d(LOG_TAG,"...DEBUG action_update");
+                Log.d(LOG_TAG, "...DEBUG action_update");
                 // use this to start and trigger a service
-                Intent i= new Intent(getApplicationContext(), UpdateService.class);
+                Intent i = new Intent(getApplicationContext(), UpdateService.class);
 // potentially add data to the intent
-                int [] cats={0,1};
+                int[] cats = {0, 1};
                 i.putExtra("CATS", cats);
                 getApplicationContext().startService(i);
 
 
+                return true;
+
+            case R.id.action_del_all:
+                StrictMode.ThreadPolicy policy = new StrictMode.
+                        ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+                getContentResolver().delete(OkProvider.CONTENT_URI, null, null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -258,11 +265,11 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
      * Fragment that appears in the "content_frame", shows a planet
      */
     public static class TaipeiFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-        String[] Taipei_District =null;// = res.getStringArray(R.array.planets_array);
-        String[] Certification_Category=null;
+        String[] Taipei_District = null;// = res.getStringArray(R.array.planets_array);
+        String[] Certification_Category = null;
         ListView listView;
         Spinner spinner;
-        int selectedCategory=0;
+        int selectedCategory = 0;
 
 
         public static final String ARG_PLANET_NUMBER = "planet_number";
@@ -285,7 +292,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             String[] projection = new String[]{OkProvider.COLUMN_ID,
                     OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR};
             //
-            String selection =OkProvider.COLUMN_CERTIFICATION_CATEGORY+"=\""+Certification_Category[cat]+"\"" ;
+            String selection = OkProvider.COLUMN_CERTIFICATION_CATEGORY + "=\"" + Certification_Category[cat] + "\"";
 
             String[] selectionArgs = null;
             String sortOrder = null;
@@ -296,9 +303,10 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
             //return null;
         }
+
         private Cursor getList(int cat) {
 
-            Cursor debugCursor=getSummary(cat);
+            Cursor debugCursor = getSummary(cat);
 //            if (debugCursor.moveToFirst()){
 //                do {
 //                    String district = debugCursor.getString(0);
@@ -334,17 +342,13 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 //            spinner.setAdapter(spinnerArrayAdapter);
 
 
-
-
-
-
             //
 
             Uri uri = OkProvider.CONTENT_URI;
             String[] projection = new String[]{OkProvider.COLUMN_ID,
                     OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR};
             //
-            String selection =OkProvider.COLUMN_CERTIFICATION_CATEGORY+"=\""+OkProvider.CATXX[cat]+"\"" ;
+            String selection = OkProvider.COLUMN_CERTIFICATION_CATEGORY + "=\"" + OkProvider.CATXX[cat] + "\"";
 
             String[] selectionArgs = null;
             String sortOrder = OkProvider.COLUMN_DISPLAY_ADDR;
@@ -373,14 +377,13 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 //        }
 
 
-
-        private Cursor getList(int cat,String district) {
+        private Cursor getList(int cat, String district) {
             Uri uri = OkProvider.CONTENT_URI;
             String[] projection = new String[]{OkProvider.COLUMN_ID,
                     OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR};
             //
-            String selection =OkProvider.COLUMN_CERTIFICATION_CATEGORY+"=\""+OkProvider.CATXX[cat]+"\""
-                    +" AND "+OkProvider.COLUMN_DISTRICT+" LIKE '%"+district+"%'";
+            String selection = OkProvider.COLUMN_CERTIFICATION_CATEGORY + "=\"" + OkProvider.CATXX[cat] + "\""
+                    + " AND " + OkProvider.COLUMN_DISTRICT + " LIKE '%" + district + "%'";
             //name like '% LIM %'
 
             String[] selectionArgs = null;
@@ -389,7 +392,6 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             return getActivity().managedQuery(uri, projection, selection, selectionArgs,
                     sortOrder);
         }
-
 
 
         void processJson(int cat) {
@@ -403,8 +405,8 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
             String strJson = readRawJson(cat);
 
-            if (strJson==null || strJson.length()==0){
-                Log.d(LOG_TAG, "NO JSON" );
+            if (strJson == null || strJson.length() == 0) {
+                Log.d(LOG_TAG, "NO JSON");
                 return;
             }
 
@@ -424,8 +426,8 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                     String certification_category = jsonObject.getString(OkProvider.COLUMN_CERTIFICATION_CATEGORY).trim();
                     String tel = jsonObject.getString(OkProvider.COLUMN_TEL).trim();
                     // not to show null
-                    if (tel==null || tel.equals("null")){
-                        tel="";
+                    if (tel == null || tel.equals("null")) {
+                        tel = "";
                     }
                     String display_addr = jsonObject.getString(OkProvider.COLUMN_DISPLAY_ADDR).trim();
 
@@ -433,18 +435,18 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                     String poi_addr = jsonObject.getString(OkProvider.COLUMN_POI_ADDR).trim();
 
                     //
-                    String addr_dist = display_addr.substring(0,6);
+                    String addr_dist = display_addr.substring(0, 6);
 
                     ContentValues weatherValues = new ContentValues();
                     weatherValues.put(OkProvider.COLUMN_NAME, name);
                     weatherValues.put(OkProvider.COLUMN_CERTIFICATION_CATEGORY, certification_category);
                     weatherValues.put(OkProvider.COLUMN_TEL, tel);
 
-                    if (tel.equals("")){
+                    if (tel.equals("")) {
                         weatherValues.put(OkProvider.COLUMN_DISPLAY_ADDR, display_addr);
 
-                    }else{
-                        weatherValues.put(OkProvider.COLUMN_DISPLAY_ADDR, display_addr+"  tel: "+tel);
+                    } else {
+                        weatherValues.put(OkProvider.COLUMN_DISPLAY_ADDR, display_addr + "  tel: " + tel);
 
                     }
 
@@ -452,7 +454,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                     weatherValues.put(OkProvider.COLUMN_POI_ADDR, poi_addr);
 
                     //
-                   String strDist=getDistrict(display_addr);
+                    String strDist = getDistrict(display_addr);
                     weatherValues.put(OkProvider.COLUMN_DISTRICT, strDist);
                     Log.d(LOG_TAG, "strDist=" + strDist + " COLUMN_DISPLAY_ADDR=" + display_addr);
                     cVVector.add(weatherValues);
@@ -461,29 +463,27 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                 }
             } catch (JSONException e) {
 //                e.printStackTrace();
-                Log.d(LOG_TAG, "JSONException "+e.toString());
-            } catch (Exception e){
-                Log.d(LOG_TAG, "Exception "+e.toString());
+                Log.d(LOG_TAG, "JSONException " + e.toString());
+            } catch (Exception e) {
+                Log.d(LOG_TAG, "Exception " + e.toString());
             }
 
             // add to database
-            if ( cVVector.size() > 0 ) {
-                String str=null;
+            if (cVVector.size() > 0) {
+                String str = null;
 
-                String selection =OkProvider.COLUMN_CERTIFICATION_CATEGORY+"=\""+OkProvider.CATXX[cat]+"\"" ;
+                String selection = OkProvider.COLUMN_CERTIFICATION_CATEGORY + "=\"" + OkProvider.CATXX[cat] + "\"";
 
-                int delCnt=getActivity().getContentResolver().delete(OkProvider.CONTENT_URI,
+                int delCnt = getActivity().getContentResolver().delete(OkProvider.CONTENT_URI,
                         selection,
                         null);
-                Log.d(LOG_TAG, "del cnt= "+ delCnt);
-
-
+                Log.d(LOG_TAG, "del cnt= " + delCnt);
 
 
                 ContentValues[] cvArray = new ContentValues[cVVector.size()];
                 cVVector.toArray(cvArray);
-                int bulkCnt=getActivity().getContentResolver().bulkInsert(OkProvider.CONTENT_URI, cvArray);
-                Log.d(LOG_TAG, "bulk cnt= "+ bulkCnt);
+                int bulkCnt = getActivity().getContentResolver().bulkInsert(OkProvider.CONTENT_URI, cvArray);
+                Log.d(LOG_TAG, "bulk cnt= " + bulkCnt);
 
 
 // delete old data so we don't build up an endless history
@@ -497,25 +497,25 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
         }
 
-        String getDistrict(String address){
-            String strDist=null;
-            int knownDist= Taipei_District.length-1;
-            for (int i=0;i< Taipei_District.length-1;i++){
-                strDist= Taipei_District[i].substring(4);
-                if (address.indexOf(strDist)>=0){
-                   knownDist=i;
+        String getDistrict(String address) {
+            String strDist = null;
+            int knownDist = Taipei_District.length - 1;
+            for (int i = 0; i < Taipei_District.length - 1; i++) {
+                strDist = Taipei_District[i].substring(4);
+                if (address.indexOf(strDist) >= 0) {
+                    knownDist = i;
                     break;
                 }
             }
             return Taipei_District[knownDist];
         }
+
         public String readRawJson(int cat) {
             StringBuilder builder = new StringBuilder();
             HttpClient client = new DefaultHttpClient();
 //        HttpGet httpGet = new HttpGet("https://bugzilla.mozilla.org/rest/bug?assigned_to=lhenry@mozilla.com");
-          //  String str = "http://data.taipei.gov.tw/opendata/apply/json/QTdBNEQ5NkQtQkM3MS00QUI2LUJENTctODI0QTM5MkIwMUZE";
-            String str=OkProvider.JSNXX[cat];
-
+            //  String str = "http://data.taipei.gov.tw/opendata/apply/json/QTdBNEQ5NkQtQkM3MS00QUI2LUJENTctODI0QTM5MkIwMUZE";
+            String str = OkProvider.JSNXX[cat];
 
 
             HttpGet httpGet = new HttpGet(str);
@@ -539,14 +539,13 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }            catch (Exception e){
+            } catch (Exception e) {
 
-                Log.d(LOG_TAG, "Exception "+e.toString());
+                Log.d(LOG_TAG, "Exception " + e.toString());
 
             }
             return builder.toString();
         }
-
 
 
         @Override
@@ -556,15 +555,15 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 //            View rootView = inflater.inflate(R.layout.fragment_listview, container, false);
 //            ListView listView=(ListView)rootView.findViewById(R.id.listView);
 
-            Taipei_District =getResources().getStringArray(R.array.taipei_district);
-            Certification_Category =getResources().getStringArray(R.array.certification_category);
+            Taipei_District = getResources().getStringArray(R.array.taipei_district);
+            Certification_Category = getResources().getStringArray(R.array.certification_category);
 
 
             View rootView = inflater.inflate(R.layout.fragment_listview_v2, container, false);
-            listView=(ListView)rootView.findViewById(R.id.listView2);
+            listView = (ListView) rootView.findViewById(R.id.listView2);
 
             //spinner
-             spinner = (Spinner) rootView.findViewById(R.id.spinner);
+            spinner = (Spinner) rootView.findViewById(R.id.spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
             ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
                     R.array.taipei_district, android.R.layout.simple_spinner_item);
@@ -575,10 +574,10 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             spinner.setOnItemSelectedListener(this);
 
 
-
-
             selectedCategory = getArguments().getInt(ARG_PLANET_NUMBER);
-            processJson(selectedCategory);
+
+          // NOT TO UPDATE HERE
+          //  processJson(selectedCategory);
 
             Cursor mGrpMemberCursor = getList(selectedCategory);
             getActivity().startManagingCursor(mGrpMemberCursor);
@@ -591,31 +590,31 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    TextView textView1=(TextView)view.findViewById(android.R.id.text1);
-                    TextView textView2=(TextView)view.findViewById(android.R.id.text2);
+                    TextView textView1 = (TextView) view.findViewById(android.R.id.text1);
+                    TextView textView2 = (TextView) view.findViewById(android.R.id.text2);
 
 
-                    String check="臺北市松山區八德路四段138號B3F（京華城股份有限公司";
-                    check=textView2.getText().toString();
-                    if (!(check.indexOf("台北市")==0 || check.indexOf("臺北市")==0)){
-                        Log.d(LOG_TAG,"before  @@@@@ "+check);
+                    String check = "臺北市松山區八德路四段138號B3F（京華城股份有限公司";
+                    check = textView2.getText().toString();
+                    if (!(check.indexOf("台北市") == 0 || check.indexOf("臺北市") == 0)) {
+                        Log.d(LOG_TAG, "before  @@@@@ " + check);
 
-                        check="台北市"+check;
-                        Log.d(LOG_TAG,"after adding prefix 台北市 @@@@@ "+check);
+                        check = "台北市" + check;
+                        Log.d(LOG_TAG, "after adding prefix 台北市 @@@@@ " + check);
 
                     }
 
-                    int temp=check.indexOf("tel");
-                    if (temp>0 ){
-                        Log.d(LOG_TAG,"to remove tel, before  @@@@@ "+check);
+                    int temp = check.indexOf("tel");
+                    if (temp > 0) {
+                        Log.d(LOG_TAG, "to remove tel, before  @@@@@ " + check);
 
-                        check=check.substring(0,temp);
-                        Log.d(LOG_TAG,"to remove tel, after  @@@@@ "+check);
+                        check = check.substring(0, temp);
+                        Log.d(LOG_TAG, "to remove tel, after  @@@@@ " + check);
 
                     }
 
                     //  check=textView1.getText().toString()+", "+check;
-                    Log.d(LOG_TAG,"addr for map is "+check);
+                    Log.d(LOG_TAG, "addr for map is " + check);
                     String map = "http://maps.google.com/maps?q=" + check;
 
 // where check is the address string
@@ -627,14 +626,6 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
             //http://stackoverflow.com/questions/9987551/how-to-open-google-maps-using-address
 
 
-
-
-
-
-
-
-
-
             // for title
 
 //            String planet = getResources().getStringArray(R.array.planets_array)[i];
@@ -643,7 +634,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 //                    "drawable", getActivity().getPackageName());
 //            ImageView iv = ((ImageView) rootView.findViewById(R.id.image));
 //            iv.setImageResource(imageId);
-           // Resources res = getResources();
+            // Resources res = getResources();
             String[] certification_category = getResources().getStringArray(R.array.certification_category);
             getActivity().setTitle(certification_category[selectedCategory]);
             return rootView;
@@ -654,14 +645,14 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
             Resources res = getResources();
             String[] taipei_district = res.getStringArray(R.array.taipei_district);
-          //  Log.d(LOG_TAG," position:"+position+ " "+taipei_district[position]);
-          //  String district=taipei_district[position].substring(4);
+            //  Log.d(LOG_TAG," position:"+position+ " "+taipei_district[position]);
+            //  String district=taipei_district[position].substring(4);
 
-            TextView textView=(TextView)view.findViewById(android.R.id.text1);
-            String strDist=textView.getText().toString();
-            Log.d(LOG_TAG," textView:"+strDist);
+            TextView textView = (TextView) view.findViewById(android.R.id.text1);
+            String strDist = textView.getText().toString();
+            Log.d(LOG_TAG, " textView:" + strDist);
 
-            Cursor mGrpMemberCursor = getList(selectedCategory,strDist);
+            Cursor mGrpMemberCursor = getList(selectedCategory, strDist);
             getActivity().startManagingCursor(mGrpMemberCursor);
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
                     android.R.layout.simple_list_item_2, mGrpMemberCursor, new String[]{OkProvider.COLUMN_NAME, OkProvider.COLUMN_DISPLAY_ADDR}, new int[]{

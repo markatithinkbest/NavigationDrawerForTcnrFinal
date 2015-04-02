@@ -1449,6 +1449,7 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f09001f;
         public static final int action_bar_title=0x7f09001e;
         public static final int action_context_bar=0x7f090032;
+        public static final int action_del_all=0x7f090047;
         public static final int action_menu_divider=0x7f090002;
         public static final int action_menu_presenter=0x7f090003;
         public static final int action_mode_bar=0x7f09002e;
@@ -1572,12 +1573,13 @@ containing a value of this type.
         public static final int action_websearch=0x7f0b0010;
         public static final int app_name=0x7f0b0011;
         public static final int app_not_available=0x7f0b0012;
-        public static final int drawer_close=0x7f0b0013;
-        public static final int drawer_open=0x7f0b0014;
-        public static final int intro_message=0x7f0b0015;
-        public static final int navigationdraweractivity_description=0x7f0b0016;
-        public static final int navigationdraweractivity_title=0x7f0b0017;
-        public static final int update=0x7f0b0018;
+        public static final int del_all=0x7f0b0013;
+        public static final int drawer_close=0x7f0b0014;
+        public static final int drawer_open=0x7f0b0015;
+        public static final int intro_message=0x7f0b0016;
+        public static final int navigationdraweractivity_description=0x7f0b0017;
+        public static final int navigationdraweractivity_title=0x7f0b0018;
+        public static final int update=0x7f0b0019;
     }
     public static final class style {
         public static final int AppTheme=0x7f0c0000;

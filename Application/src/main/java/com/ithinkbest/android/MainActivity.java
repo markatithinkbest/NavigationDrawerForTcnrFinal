@@ -19,6 +19,7 @@ package com.ithinkbest.android;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -32,12 +33,18 @@ import com.example.android.navigationdrawer.R;
  * A simple launcher activity offering access to the individual samples in this project.
  */
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
+
+    static String LOG_TAG = "MARK987";
+
     private Sample[] mSamples;
     private GridView mGridView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 
         // Prepare list of samples in this dashboard.
         mSamples = new Sample[]{
@@ -49,6 +56,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         mGridView = (GridView) findViewById(android.R.id.list);
         mGridView.setAdapter(new SampleAdapter());
         mGridView.setOnItemClickListener(this);
+
+
+        Log.d(LOG_TAG, "...MainActivity to update JSON");
+        // use this to start and trigger a service
+        Intent i = new Intent(getApplicationContext(), UpdateService.class);
+// potentially add data to the intent
+        int[] cats = {0};
+        i.putExtra("CATS", cats);
+        getApplicationContext().startService(i);
+
+
+
     }
 
     @Override
