@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Application/Application.iml" filepath="$PROJECT_DIR$/Application/Application.iml" />
-      <module fileurl="file://$PROJECT_DIR$/NavigationDrawerForTcnrFinal.iml" filepath="$PROJECT_DIR$/NavigationDrawerForTcnrFinal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/taipeiok.iml" filepath="$PROJECT_DIR$/taipeiok.iml" />
     </modules>
   </component>
 </project>

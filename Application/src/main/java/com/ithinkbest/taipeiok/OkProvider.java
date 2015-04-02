@@ -20,7 +20,7 @@ public class OkProvider extends ContentProvider {
     // ### NEED TO CHANGE TO YOUR DOMAIN
     // static final String PROVIDER_NAME =
     // "com.ithinkbest.tcnr18.finaltwo.MembersProvider";
-    static final String PROVIDER_NAME = "com.ithinkbest.android.OkProvider";
+    static final String PROVIDER_NAME = "com.ithinkbest.taipeiok.OkProvider";
 
     private static final String SUB1 = "sub1";
     private static final String SUB2 = "sub2"; // for rawQuery

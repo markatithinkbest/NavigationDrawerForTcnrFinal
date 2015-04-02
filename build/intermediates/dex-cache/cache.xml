@@ -51,6 +51,20 @@
         <dex dex="/home/u1/000/android-projects/NavigationDrawerForTcnrFinal/Application/build/intermediates/pre-dexed/debug/classes-0681ed37652d6d683370b6c21cb542bc7bf6569e.jar" />
     </item>
     <item
+        jar="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/libs/internal_impl-21.0.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
+        <dex dex="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-ca6e4378dbc158579dd907f09bd1855fa4ca4362.jar" />
+    </item>
+    <item
+        jar="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b017100da14f9c158c9f5f2f508333c224b24a7c">
+        <dex dex="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/pre-dexed/debug/classes-062c4b1a3a85c58f6e036cabd86f8e58ea33a4d7.jar" />
+    </item>
+    <item
         jar="/home/u1/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-io/1.3.2/b6dde38349ba9bb5e6ea6320531eae969985dae5/commons-io-1.3.2.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -79,6 +93,13 @@
         <dex dex="/home/u1/000/android-projects/NavigationDrawerForTcnrFinal/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-a148dcf3a932c36343422e5c3ffe6e3fed01ac3d.jar" />
     </item>
     <item
+        jar="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3">
+        <dex dex="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/pre-dexed/debug/classes-1eed92a4fe990176c2410f7e178cc349defe180d.jar" />
+    </item>
+    <item
         jar="/home/u1/000/android-projects/NavigationDrawerForTcnrFinal/Application/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/classes.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -100,6 +121,13 @@
         <dex dex="/home/u1/000/android-projects/NavigationDrawer/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-6f1c8d5039ca38b2b5b3295afebe2387279df7f6.jar" />
     </item>
     <item
+        jar="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.2/libs/internal_impl-21.0.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9346da9fb778af9e451211bbc3541daced174ba7">
+        <dex dex="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-fbee0a24931bbf21e505f64fb0aeb4e9196ce41b.jar" />
+    </item>
+    <item
         jar="/home/u1/000/android-projects/NavigationDrawerForTcnrFinal/Application/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.2/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -114,6 +142,13 @@
         <dex dex="/home/u1/000/android-projects/NavigationDrawer/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-fdab4f814e3dc9a4a0f80affdf73433624ce0899.jar" />
     </item>
     <item
+        jar="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4796f18d3750bf2bfa078407a94a7f9db35b440d">
+        <dex dex="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/pre-dexed/debug/classes-7534a608dbd407c96344bf504e4e2f109ae33a66.jar" />
+    </item>
+    <item
         jar="/home/u1/000/android-projects/NavigationDrawerForTcnrFinal/Application/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.2/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -126,6 +161,13 @@
         revision="22.0.1"
         sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
         <dex dex="/home/u1/000/android-projects/NavigationDrawerForTcnrFinal/Application/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-a148dcf3a932c36343422e5c3ffe6e3fed01ac3d.jar" />
+    </item>
+    <item
+        jar="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7ae2d38807a43b2f2185ff4089a92c790b579e54">
+        <dex dex="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/pre-dexed/debug/classes-d081794e73929224a2b5e693f59429d4238bd59e.jar" />
     </item>
     <item
         jar="/home/u1/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.2/support-annotations-21.0.2.jar"
@@ -147,6 +189,13 @@
         revision="22.0.1"
         sha1="b017100da14f9c158c9f5f2f508333c224b24a7c">
         <dex dex="/home/u1/000/android-projects/NavigationDrawerForTcnrFinal/Application/build/intermediates/pre-dexed/debug/classes-6fed25bc6a278ce836600edf4d4f20696b180c37.jar" />
+    </item>
+    <item
+        jar="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61965ae058916e6a57950dd61b0164dc866af19a">
+        <dex dex="/home/u1/000/android-projects/taipeiok/Application/build/intermediates/pre-dexed/debug/classes-a4a4478f6313bcf3b68901c210a8122ee305e10a.jar" />
     </item>
     <item
         jar="/home/u1/000/android-projects/NavigationDrawerForTcnrFinal/Application/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.2/classes.jar"
